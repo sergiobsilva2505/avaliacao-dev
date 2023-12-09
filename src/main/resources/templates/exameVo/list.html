@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://thymeleaf.org">
+<html lang="pt-br" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>CadastrarExames</title>
@@ -48,6 +48,7 @@
 <!--                        <a href="${editar}" class="btn btn-warning text-white">-->
 <!--                            <s:text name="label.editar"/>-->
 <!--                        </a>-->
+                        <a class="btn btn-warning text-white" th:href="@{/exames/{id}(id=${exame.rowid})}">EDITAR</a>
 
 <!--                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">-->
 <!--                            <s:text name="label.excluir"/>-->

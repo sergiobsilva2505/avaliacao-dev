@@ -1,8 +1,8 @@
 package br.com.sbs.avaliacaodevspring.exame;
 
+import br.com.sbs.avaliacaodevspring.exame.dto.ExameVoDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "EXAME")
@@ -18,8 +18,22 @@ public class ExameVo {
     public ExameVo() {
     }
 
+    public ExameVo(Long rowid, String nome) {
+        this.rowid = rowid;
+        this.nome = nome;
+    }
+
     public ExameVo(String nome) {
         this.nome = nome;
+    }
+
+    public void merge(ExameVo exameVo) {
+        this.rowid = exameVo.rowid;
+        this.nome = exameVo.nome;
+    }
+
+    public ExameVoDTO toDTO(ExameVo exameVo) {
+        return new ExameVoDTO(exameVo.getRowid(), exameVo.getNome());
     }
 
     public Long getRowid() {

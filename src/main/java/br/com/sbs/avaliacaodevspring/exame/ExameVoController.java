@@ -1,16 +1,12 @@
 package br.com.sbs.avaliacaodevspring.exame;
 
-import br.com.sbs.avaliacaodevspring.exame.dto.ExameVoView;
-import br.com.sbs.avaliacaodevspring.exame.dto.NewExameVoForm;
+import br.com.sbs.avaliacaodevspring.exame.dto.ExameVoDTO;
 import br.com.sbs.avaliacaodevspring.filter.OpcoesComboBuscarExames;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/exames")
@@ -23,10 +19,21 @@ public class ExameVoController {
     }
 
     @GetMapping("/form")
-    public String showForm(@ModelAttribute NewExameVoForm newExameVoForm, Model model) {
-        model.addAttribute("newExameVoForm", newExameVoForm);
+    public String showForm(ExameVoDTO exameVoDTO, Model model) {
+        model.addAttribute("exameVoDTO", exameVoDTO);
 
-        return "exameVo/newExameForm";
+        return "exameVo/newForm";
+    }
+
+    @PostMapping
+    public String save(@Valid @ModelAttribute ExameVoDTO exameVoDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("exameVoDTO", exameVoDTO);
+            return "exameVo/newForm";
+        }
+        exameVoService.save(exameVoDTO);
+
+        return "redirect:/exames";
     }
 
     @GetMapping
@@ -37,13 +44,22 @@ public class ExameVoController {
         return "exameVo/list";
     }
 
-    @PostMapping
-    public String save(@Valid NewExameVoForm newExameVoForm, BindingResult bindingResult, Model model) {
+    @GetMapping("/{id}")
+    public String showExame(@PathVariable Long id, ExameVoDTO exameVoDTO, Model model) {
+        ExameVoDTO exameDTO = exameVoService.findById(id);
+        model.addAttribute("exameVoDTO", exameDTO);
+
+        return "exameVo/updateForm";
+    }
+
+    @PutMapping
+    public String update(@ModelAttribute @Valid ExameVoDTO exameVoDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-//            model.addAttribute("newExameVoForm", newExameVoForm);
-            return showForm(newExameVoForm, model);
+            model.addAttribute("exameVoDTO", exameVoDTO);
+            return "exameVo/updateForm";
         }
-        exameVoService.save(newExameVoForm);
+
+        exameVoService.update(exameVoDTO);
 
         return "redirect:/exames";
     }

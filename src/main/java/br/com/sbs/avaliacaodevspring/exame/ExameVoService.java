@@ -1,11 +1,10 @@
 package br.com.sbs.avaliacaodevspring.exame;
 
-import br.com.sbs.avaliacaodevspring.exame.dto.ExameVoView;
-import br.com.sbs.avaliacaodevspring.exame.dto.NewExameVoForm;
+import br.com.sbs.avaliacaodevspring.exame.dto.ExameVoDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,16 +16,31 @@ public class ExameVoService {
         this.exameVoRepository = exameVoRepository;
     }
 
-    public ExameVoView save(NewExameVoForm newExameVoForm) {
-        ExameVo exameVo = newExameVoForm.toEntity();
+    @Transactional
+    public ExameVoDTO save(ExameVoDTO exameVoDTO) {
+        ExameVo exameVo = exameVoDTO.toEntity();
         exameVo = exameVoRepository.save(exameVo);
 
-        return new ExameVoView(exameVo);
+        return exameVo.toDTO(exameVo);
     }
 
-    public Collection<ExameVoView> findall() {
-        List<ExameVo> examesVo = exameVoRepository.findAll();
+    public Collection<ExameVoDTO> findall() {
+        Collection<ExameVo> examesVo = exameVoRepository.findAll();
 
-        return examesVo.stream().map(ExameVoView::new).collect(Collectors.toList());
+        return examesVo.stream().map(ExameVoDTO::toDTO).collect(Collectors.toList());
+    }
+
+    public ExameVoDTO findById(Long id) {
+        ExameVo exameVo = exameVoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Exame não encontrado"));
+
+        return exameVo.toDTO(exameVo);
+    }
+
+    @Transactional
+    public ExameVoDTO update(ExameVoDTO exameVoDTO) {
+        ExameVo exameVo = exameVoDTO.toEntity();
+        exameVo = exameVoRepository.save(exameVo);
+
+        return exameVo.toDTO(exameVo);
     }
 }
