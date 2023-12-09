@@ -57,17 +57,13 @@
                 </tr>
             </tbody>
 
-<!--            <tfoot class="table-secondary">-->
-<!--            <tr>-->
-<!--                <td colspan="3">-->
-<!--                    <s:url action="novoExames" var="novo"/>-->
-
-<!--                    <a href="${novo}" class="btn btn-success">-->
-<!--                        <s:text name="label.novo"/>-->
-<!--                    </a>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tfoot>-->
+            <tfoot class="table-secondary">
+            <tr>
+                <td colspan="3">
+                    <a th:href="@{/exames/form}" class="btn btn-success">NOVO</a>
+                </td>
+            </tr>
+            </tfoot>
         </table>
     </div>
 
