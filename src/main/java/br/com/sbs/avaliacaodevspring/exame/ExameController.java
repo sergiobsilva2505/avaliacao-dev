@@ -24,7 +24,7 @@ public class ExameController {
     public String showForm(NewExameForm newExameForm, Model model) {
         model.addAttribute("exameVoDTO", newExameForm);
 
-        return "exameVo/newForm";
+        return "exame/newForm";
     }
 
     @PostMapping
@@ -43,7 +43,7 @@ public class ExameController {
         model.addAttribute("opcoesComBuscarExames", OpcoesComboBuscarExames.values());
         model.addAttribute("exames", exameService.findAll());
 
-        return "exameVo/list";
+        return "exame/list";
     }
 
     @GetMapping("/{id}")
@@ -51,7 +51,7 @@ public class ExameController {
         ExameView exameView = exameService.findById(id);
         model.addAttribute("exameView", exameView);
 
-        return "exameVo/updateForm";
+        return "exame/updateForm";
     }
 
     @PutMapping
@@ -71,7 +71,5 @@ public class ExameController {
 
         return "redirect:/exames";
     }
-
-//    TODO confirm modal controller in list html
 
 }
