@@ -3,6 +3,7 @@ package br.com.sbs.avaliacaodevspring.exame;
 import br.com.sbs.avaliacaodevspring.exame.dto.ExameView;
 import br.com.sbs.avaliacaodevspring.exame.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.exame.dto.UpdateExameForm;
+import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,15 +33,14 @@ public class ExameService {
     }
 
     public ExameView findById(Long id) {
-        Exame exame = exameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Exame não encontrado"));
+        Exame exame = exameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
 
         return new ExameView(exame);
     }
 
     @Transactional
     public ExameView update(UpdateExameForm updateExameForm) {
-        Exame exame = exameRepository.findById(updateExameForm.rowid()).orElseThrow(() -> new IllegalArgumentException("Exame não encontrado"));
-//        exame = exameRepository.save(exame);
+        Exame exame = exameRepository.findById(updateExameForm.rowid()).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(updateExameForm.rowid())));
         exame.merge(updateExameForm);
 
         return new ExameView(exame);
