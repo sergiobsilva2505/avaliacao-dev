@@ -37,7 +37,7 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public String save(@ModelAttribute NewFuncionarioForm newFuncionarioForm, BindingResult bindingResult, Model model) {
+    public String save(@Valid @ModelAttribute NewFuncionarioForm newFuncionarioForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return showForm(newFuncionarioForm, model);
         }
@@ -57,9 +57,7 @@ public class FuncionarioController {
     @PutMapping("/{id}")
     public String update(@PathVariable Long id, @Valid UpdateFuncionarioForm updateFuncionarioForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("updateFuncionarioForm", updateFuncionarioForm);
-
-            return "funcionario/updateForm";
+            return showFuncionario(id, updateFuncionarioForm, model);
         }
 
         FuncionarioView funcionarioView = funcionarioService.update(id, updateFuncionarioForm);

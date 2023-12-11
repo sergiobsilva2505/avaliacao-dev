@@ -30,8 +30,7 @@ public class ExameController {
     @PostMapping
     public String save(@Valid NewExameForm newExameForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("newExameForm", newExameForm);
-            return "exameVo/newForm";
+            return showForm(newExameForm, model);
         }
         exameService.save(newExameForm);
 
@@ -57,8 +56,7 @@ public class ExameController {
     @PutMapping("/{id}")
     public String update(@PathVariable Long id, @Valid UpdateExameForm updateExameForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("updateExameForm", updateExameForm);
-            return "exameVo/updateForm";
+            return showExame(id, updateExameForm, model);
         }
         exameService.update(id, updateExameForm);
 
