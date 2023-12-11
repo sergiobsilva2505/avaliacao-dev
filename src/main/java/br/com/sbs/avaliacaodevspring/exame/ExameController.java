@@ -41,7 +41,7 @@ public class ExameController {
     @GetMapping
     public String findAll(Model model) {
         model.addAttribute("opcoesComBuscarExames", OpcoesComboBuscarExames.values());
-        model.addAttribute("exames", exameService.findall());
+        model.addAttribute("exames", exameService.findAll());
 
         return "exameVo/list";
     }
@@ -60,7 +60,6 @@ public class ExameController {
             model.addAttribute("updateExameForm", updateExameForm);
             return "exameVo/updateForm";
         }
-
         exameService.update(updateExameForm);
 
         return "redirect:/exames";

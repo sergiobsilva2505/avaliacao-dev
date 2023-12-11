@@ -1,5 +1,6 @@
 package br.com.sbs.avaliacaodevspring.exame;
 
+import br.com.sbs.avaliacaodevspring.exame.dto.UpdateExameForm;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -26,9 +27,8 @@ public class Exame {
         this.nome = nome;
     }
 
-    public void merge(Exame exame) {
-        this.rowid = exame.rowid;
-        this.nome = exame.nome;
+    public void merge(UpdateExameForm exame) {
+        this.nome = exame.nome();
     }
 
     public Long getRowid() {

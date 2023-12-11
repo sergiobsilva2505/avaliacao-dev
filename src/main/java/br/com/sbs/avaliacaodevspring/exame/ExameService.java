@@ -25,7 +25,7 @@ public class ExameService {
         return new ExameView(exameRepository.save(exame));
     }
 
-    public Collection<ExameView> findall() {
+    public Collection<ExameView> findAll() {
         Collection<Exame> examesVo = exameRepository.findAll();
 
         return examesVo.stream().map(ExameView::new).collect(Collectors.toList());
@@ -39,10 +39,11 @@ public class ExameService {
 
     @Transactional
     public ExameView update(UpdateExameForm updateExameForm) {
-        Exame exame = exameRepository.getReferenceById(updateExameForm.rowid());
-        exame.merge(exame);
+        Exame exame = exameRepository.findById(updateExameForm.rowid()).orElseThrow(() -> new IllegalArgumentException("Exame não encontrado"));
+//        exame = exameRepository.save(exame);
+        exame.merge(updateExameForm);
 
-        return new ExameView(exameRepository.save(exame));
+        return new ExameView(exame);
     }
 
     @Transactional

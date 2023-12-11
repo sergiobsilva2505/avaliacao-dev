@@ -5,7 +5,4 @@ import jakarta.validation.constraints.NotBlank;
 
 public record UpdateExameForm(Long rowid, @NotBlank String nome) {
 
-    public Exame toEntity() {
-        return new Exame(rowid, nome);
-    }
 }
