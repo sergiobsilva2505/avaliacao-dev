@@ -22,7 +22,7 @@ public class ExameController {
 
     @GetMapping("/form")
     public String showForm(NewExameForm newExameForm, Model model) {
-        model.addAttribute("exameVoDTO", newExameForm);
+        model.addAttribute("newExameForm", newExameForm);
 
         return "exame/newForm";
     }
@@ -54,13 +54,13 @@ public class ExameController {
         return "exame/updateForm";
     }
 
-    @PutMapping
-    public String update(@Valid UpdateExameForm updateExameForm, BindingResult bindingResult, Model model) {
+    @PutMapping("/{id}")
+    public String update(@PathVariable Long id, @Valid UpdateExameForm updateExameForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("updateExameForm", updateExameForm);
             return "exameVo/updateForm";
         }
-        exameService.update(updateExameForm);
+        exameService.update(id, updateExameForm);
 
         return "redirect:/exames";
     }

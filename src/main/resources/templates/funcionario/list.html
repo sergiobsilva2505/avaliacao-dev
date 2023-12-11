@@ -3,21 +3,21 @@
 <html lang="pt-br" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>CadastrarExames</title>
+    <title>CadastrarFuncionarios</title>
     <link rel='stylesheet' th:href="@{webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
 </head>
 <body class="bg-secondary">
 <div class="container">
     <div class="row mt-5 mb-2">
         <div class="col-sm p-0">
-            <form action="/filtrarExames.action">
+            <form action="/filtrarFuncionarios.action">
                 <div class="input-group">
                     <label class="input-group-text" for="opcoesCombo">
 								<strong>BUSCAR POR:</strong>
                     </label>
                     <select class="form-select"  id="opcoesCombo">
                         <option value="">Escolha</option>
-                        <option th:each="opcao : ${opcoesComBuscarExames}" th:value="${opcao}" th:text="${opcao.descricao}"></option>
+                        <option th:each="opcao : ${opcoesComBuscarFuncionarios}" th:value="${opcao}" th:text="${opcao.descricao}"></option>
                     </select>
                     <input class="form-control" id="nome" name="filtrar.valorBusca">
                     <button class="btn btn-primary" type="submit">PESQUISAR</button>
@@ -37,12 +37,12 @@
             </thead>
 
             <tbody>
-                <tr th:each = "exame : ${exames}">
-                    <td th:text="${exame.rowid}"></td>
-                    <td th:text="${exame.nome}"></td>
+                <tr th:each = "funcionario : ${funcionarios}">
+                    <td th:text="${funcionario.rowid}"></td>
+                    <td th:text="${funcionario.nome}"></td>
                     <td class="text-end">
-                        <a class="btn btn-warning text-white" th:href="@{/exames/{id}(id=${exame.rowid})}">EDITAR</a>
-                        <a class="btn btn-danger" data-bs-toggle="modal" th:data-bs-objectid="@{/exames/{id}(id=${exame.rowid})}" data-bs-target="#confirmarExclusao">DELETAR</a>
+                        <a class="btn btn-warning text-white" th:href="@{/funcionarios/{id}(id=${funcionario.rowid})}">EDITAR</a>
+                        <a class="btn btn-danger" data-bs-toggle="modal" th:data-bs-objectid="@{/funcionarios/{id}(id=${funcionario.rowid})}" data-bs-target="#confirmarExclusao">DELETAR</a>
                     </td>
                 </tr>
             </tbody>
@@ -50,7 +50,7 @@
             <tfoot class="table-secondary">
             <tr>
                 <td colspan="3">
-                    <a th:href="@{/exames/form}" class="btn btn-success">NOVO</a>
+                    <a th:href="@{/funcionarios/form}" class="btn btn-success">NOVO</a>
                 </td>
             </tr>
             </tfoot>

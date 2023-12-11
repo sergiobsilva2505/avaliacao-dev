@@ -1,5 +1,6 @@
 package br.com.sbs.avaliacaodevspring.funcionario;
 
+import br.com.sbs.avaliacaodevspring.funcionario.dto.UpdateFuncionarioForm;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -22,6 +23,10 @@ public class Funcionario {
         this.nome = nome;
     }
 
+    public void merge(UpdateFuncionarioForm updateFuncionarioForm) {
+        this.nome = updateFuncionarioForm.nome();
+    }
+
     public Funcionario(String nome) {
         this.nome = nome;
     }
@@ -38,4 +43,5 @@ public class Funcionario {
     public String toString() {
         return "Funcionario { id= " + rowid + ", nome= " + nome + " }";
     }
+
 }

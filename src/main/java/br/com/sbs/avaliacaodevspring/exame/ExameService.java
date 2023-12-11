@@ -39,8 +39,8 @@ public class ExameService {
     }
 
     @Transactional
-    public ExameView update(UpdateExameForm updateExameForm) {
-        Exame exame = exameRepository.findById(updateExameForm.rowid()).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(updateExameForm.rowid())));
+    public ExameView update(Long id, UpdateExameForm updateExameForm) {
+        Exame exame = exameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
         exame.merge(updateExameForm);
 
         return new ExameView(exame);

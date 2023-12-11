@@ -4,24 +4,23 @@
       xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Exame</title>
+    <title>Cadastro de Funcionarios</title>
     <link rel='stylesheet' href='/webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
 </head>
 <body class="bg-secondary">
 
 <div class="container">
-    <form th:action="@{/exames/{id}(id=${exameView.rowid})}" th:object="${updateExameForm}" method="post">
-        <input type="hidden" name="_method" value="put">
+    <form th:action="@{/funcionarios}" th:object="${newFuncionarioForm}" method="post">
 
         <div class="card mt-5">
             <div class="card-header">
                 <div class="row">
                     <div class="col-sm-5">
-                        <a th:href="@{/exames}" class="btn btn-success" >Exames</a>
+                        <a th:href="@{/funcionarios}" class="btn btn-success" >Funcionarios</a>
                     </div>
 
                     <div class="col-sm">
-                        <h5 class="card-title">Atualiza Exame</h5>
+                        <h5 class="card-title">Novo Funcionario</h5>
                     </div>
                 </div>
             </div>
@@ -33,14 +32,14 @@
                     </label>
 
                     <div class="col-sm-2">
-                        <input th:field="${exameView.rowid}" th:value="${exameView.rowid}" type="text" class="form-control" id="rowid" readonly="true"/>
+                        <input th:field="*{rowid}" type="text" class="form-control" id="rowid" name="rowid" readonly="true"/>
                     </div>
                 </div>
 
                 <div class="row align-items-center mt-3">
                     <label for="nome" class="col-sm-1 col-form-label text-center">Nome:</label>
                     <div class="col-sm-5">
-                        <input th:field="${exameView.nome}" th:value="${exameView.nome}" class="form-control" id="nome"/>
+                        <input th:field="*{nome}" class="form-control" id="nome" name="nome"/>
                         <span style="color: red" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                     </div>
                 </div>
@@ -56,6 +55,6 @@
     </form>
 </div>
 
-<script th:src="@{webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
