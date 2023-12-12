@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>404 Error Page</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <div class="d-flex align-items-center justify-content-center vh-100 bg-secondary">
+        <div class="text-center text-light">
+            <h1 class="display-1 fw-bold text-white">404</h1>
+            <p class="fs-3 text-white"><span>Opps!</span> Página não encontrada.</p>
+            <p class="lead">
+                A página que você procura não existe.
+            </p>
+            <a th:href="@{/exames}" class="btn btn-light">Exames</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
