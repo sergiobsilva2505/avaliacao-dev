@@ -38,6 +38,10 @@ public class ExameService {
         return new ExameView(exame);
     }
 
+    public Exame getById(Long id) {
+        return exameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
+    }
+
     @Transactional
     public ExameView update(Long id, UpdateExameForm updateExameForm) {
         Exame exame = exameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));

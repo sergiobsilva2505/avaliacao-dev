@@ -4,23 +4,24 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{template.html}">
 <head>
-    <title>CadastroExame</title>
+    <title>ExamesRealizados</title>
 </head>
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
     <div class="container">
-        <form th:action="@{/exames/{id}(id=${exameView.rowid})}" th:object="${updateExameForm}" method="post">
+        <form th:action="@{/exames-funcionarios/{id}(id=${funcionarioView.rowid})}" th:object="${updateFuncionarioForm}"
+              method="post">
             <input type="hidden" name="_method" value="put">
 
             <div class="card mt-5">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-5">
-                            <a th:href="@{/exames}" class="btn btn-success">Exames</a>
+                            <a th:href="@{/exames-funcionarios}" class="btn btn-success">Exames realizados</a>
                         </div>
 
                         <div class="col-sm">
-                            <h5 class="card-title">Atualiza Exame</h5>
+                            <h5 class="card-title">Atualiza exames realizados</h5>
                         </div>
                     </div>
                 </div>
@@ -32,7 +33,7 @@
                         </label>
 
                         <div class="col-sm-2">
-                            <input th:field="${exameView.rowid}" th:value="${exameView.rowid}" type="text"
+                            <input th:field="${funcionarioView.rowid}" th:value="${funcionarioView.rowid}" type="text"
                                    class="form-control" id="rowid" readonly="true"/>
                         </div>
                     </div>
@@ -40,8 +41,8 @@
                     <div class="row align-items-center mt-3">
                         <label for="nome" class="col-sm-1 col-form-label text-center">Nome:</label>
                         <div class="col-sm-5">
-                            <input th:field="${exameView.nome}" th:value="${exameView.nome}" class="form-control"
-                                   id="nome"/>
+                            <input th:field="${funcionarioView.nome}" th:value="${funcionarioView.nome}"
+                                   class="form-control" id="nome"/>
                             <span style="color: red" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                         </div>
                     </div>

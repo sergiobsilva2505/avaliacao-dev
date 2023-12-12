@@ -38,6 +38,10 @@ public class FuncionarioService {
         return new FuncionarioView(funcionario);
     }
 
+    public Funcionario getById(Long id) {
+        return funcionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
+    }
+
     @Transactional
     public FuncionarioView update(Long id, UpdateFuncionarioForm updateFuncionarioForm) {
         Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));

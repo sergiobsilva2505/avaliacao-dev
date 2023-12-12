@@ -33,19 +33,27 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>NAME</th>
+                    <th>REALIZADO EM</th>
+                    <th>ID =></th>
+                    <th>EXAME</th>
+                    <th>ID =></th>
+                    <th>FUNCIONARIO</th>
                     <th class="text-end mt-5">AÇÃO</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="funcionario : ${funcionarios}">
-                    <td th:text="${funcionario.rowid}"></td>
-                    <td th:text="${funcionario.nome}"></td>
+                <tr th:each="exameFuncionario : ${exameFuncionarioViews}">
+                    <td th:text="${exameFuncionario.rowid}"></td>
+                    <td th:text="${#temporals.format(exameFuncionario.realizadoEm, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${exameFuncionario.exameId}"></td>
+                    <td th:text="${exameFuncionario.nomeExame}"></td>
+                    <td th:text="${exameFuncionario.funcionarioId}"></td>
+                    <td th:text="${exameFuncionario.nomeFuncionario}"></td>
                     <td class="text-end">
-                        <a class="btn btn-warning text-white" th:href="@{/funcionarios/{id}(id=${funcionario.rowid})}">EDITAR</a>
+                        <a class="btn btn-warning text-white" th:href="@{/exames-funcionarios/{id}(id=${exameFuncionario.rowid})}">EDITAR</a>
                         <a class="btn btn-danger" data-bs-toggle="modal"
-                           th:data-bs-objectid="@{/funcionarios/{id}(id=${funcionario.rowid})}"
+                           th:data-bs-objectid="@{/exames-funcionarios/{id}(id=${exameFuncionario.rowid})}"
                            data-bs-target="#confirmarExclusao">DELETAR</a>
                     </td>
                 </tr>
@@ -53,8 +61,8 @@
 
                 <tfoot class="table-secondary">
                 <tr>
-                    <td colspan="3">
-                        <a th:href="@{/funcionarios/form}" class="btn btn-success">NOVO</a>
+                    <td colspan="7">
+                        <a th:href="@{/exames-funcionarios/form}" class="btn btn-success">NOVO</a>
                     </td>
                 </tr>
                 </tfoot>

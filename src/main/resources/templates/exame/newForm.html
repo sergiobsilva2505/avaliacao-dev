@@ -39,7 +39,7 @@
                     <div class="row align-items-center mt-3">
                         <label for="nome" class="col-sm-1 col-form-label text-center">Nome:</label>
                         <div class="col-sm-5">
-                            <input th:field="*{nome}" class="form-control" id="nome" name="nome"/>
+                            <input th:field="*{nome}" type="text" class="form-control" id="nome" name="nome"/>
                             <span style="color: red" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                         </div>
                     </div>

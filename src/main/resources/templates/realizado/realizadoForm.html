@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>ExamesRealizados</title>
+</head>
+<body class="bg-secondary">
+<div layout:fragment="conteudo">
+    <div class="container">
+        <form th:action="@{/exames-funcionarios}" th:object="${newExameFuncionarioForm}" method="post">
+
+            <div class="card mt-5">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <a th:href="@{/exames-funcionarios}" class="btn btn-success">Exames realizados</a>
+                        </div>
+
+                        <div class="col-sm">
+                            <h5 class="card-title">Exame funcionário</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <label for="rowid" class="col-sm-2 col-form-label text-end">Código:</label>
+
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="rowid" name="rowid" readonly="true"/>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mt-3">
+                        <label for="exameId" class="col-sm-2 col-form-label text-end">Cód. exame:</label>
+                        <div class="col-sm-4">
+                            <input th:field="*{exameId}" type="number" class="form-control"  id="exameId" name="exameId"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('exameId')}" th:errors="*{exameId}"></span>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center mt-3">
+                        <label for="funcionarioId" class="col-sm-2 col-form-label text-end">Cod. funcionario:</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="number" th:field="*{funcionarioId}" id="funcionarioId" name="funcionarioId"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('funcionarioId')}" th:errors="*{funcionarioId}"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-primary col-sm-4 offset-sm-1">Salvar</button>
+                        <button type="reset" class="btn btn-secondary col-sm-4 offset-sm-2">Limpar Formulario</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
