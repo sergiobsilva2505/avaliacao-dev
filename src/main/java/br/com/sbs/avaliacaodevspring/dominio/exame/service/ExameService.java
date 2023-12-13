@@ -9,6 +9,7 @@ import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.DatabaseExc
 import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.ResourceDatabaseException;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,13 +68,14 @@ public class ExameService {
 
     @Transactional
     public void deleteById(Long id, boolean isRequestedByAPI) {
+        String message = "Não pode ser deletado! Está associado a outros objetos";
         try {
             exameRepository.deleteById(id);
-        } catch (Exception ex) {
+        } catch (DataIntegrityViolationException ex) {
             if (isRequestedByAPI) {
-                throw new ResourceDatabaseException("Não pode ser deletado! Está associado a outros objetos");
+                throw new ResourceDatabaseException(message);
             }
-            throw new DatabaseException("Não pode ser deletado! Está associado a outros objetos");
+            throw new DatabaseException(message);
         }
     }
 
