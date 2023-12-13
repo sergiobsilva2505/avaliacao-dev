@@ -2,6 +2,7 @@ package br.com.sbs.avaliacaodevspring.realizado;
 
 import br.com.sbs.avaliacaodevspring.exame.Exame;
 import br.com.sbs.avaliacaodevspring.funcionario.Funcionario;
+import br.com.sbs.avaliacaodevspring.realizado.dto.UpdateExameFuncionarioForm;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -33,6 +34,11 @@ public class ExameFuncionario {
 
     public ExameFuncionario(Exame exame, Funcionario funcionario) {
         this.realizadoEm = LocalDateTime.now();
+        this.exame = exame;
+        this.funcionario = funcionario;
+    }
+
+    public void merge(Exame exame, Funcionario funcionario) {
         this.exame = exame;
         this.funcionario = funcionario;
     }
@@ -70,4 +76,5 @@ public class ExameFuncionario {
                 ", funcionarioId=" + funcionario +
                 '}';
     }
+
 }

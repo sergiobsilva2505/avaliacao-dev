@@ -48,10 +48,27 @@ public class ExameFuncionarioController {
     }
 
     @GetMapping("/{id}")
-    public String showExameRealizado(@PathVariable Long id, Model model) {
+    public String showExameRealizado(@PathVariable Long id, UpdateExameFuncionarioForm updateExameFuncionarioForm, Model model) {
         ExameFuncionarioView exameFuncionarioView = exameFuncionarioService.findById(id);
         model.addAttribute("exameFuncionarioView", exameFuncionarioView);
 
         return "realizado/updateForm";
+    }
+
+    @PutMapping("/{id}")
+    public String update(@PathVariable Long id, @Valid @ModelAttribute UpdateExameFuncionarioForm updateExameFuncionarioForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return showExameRealizado(id, updateExameFuncionarioForm, model);
+        }
+        exameFuncionarioService.update(id, updateExameFuncionarioForm);
+
+        return "redirect:/exames-funcionarios";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteById(@PathVariable Long id) {
+        exameFuncionarioService.delete(id);
+
+        return "redirect:/exames-funcionarios";
     }
 }

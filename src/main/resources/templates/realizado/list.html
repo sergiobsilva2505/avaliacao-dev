@@ -34,9 +34,7 @@
                 <tr>
                     <th>ID</th>
                     <th>REALIZADO EM</th>
-                    <th>ID =></th>
                     <th>EXAME</th>
-                    <th>ID =></th>
                     <th>FUNCIONARIO</th>
                     <th class="text-end mt-5">AÇÃO</th>
                 </tr>
@@ -47,9 +45,7 @@
                     <td th:text="${exameFuncionario.rowid}"></td>
                     <td th:text="${#temporals.format(exameFuncionario.realizadoEm, 'dd/MM/yyyy HH:mm')}"></td>
                     <td th:text="${exameFuncionario.exameId}"></td>
-                    <td th:text="${exameFuncionario.nomeExame}"></td>
                     <td th:text="${exameFuncionario.funcionarioId}"></td>
-                    <td th:text="${exameFuncionario.nomeFuncionario}"></td>
                     <td class="text-end">
                         <a class="btn btn-warning text-white" th:href="@{/exames-funcionarios/{id}(id=${exameFuncionario.rowid})}">EDITAR</a>
                         <a class="btn btn-danger" data-bs-toggle="modal"
@@ -61,7 +57,7 @@
 
                 <tfoot class="table-secondary">
                 <tr>
-                    <td colspan="7">
+                    <td colspan="5">
                         <a th:href="@{/exames-funcionarios/form}" class="btn btn-success">NOVO</a>
                     </td>
                 </tr>

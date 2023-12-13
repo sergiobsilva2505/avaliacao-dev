@@ -9,7 +9,9 @@ import br.com.sbs.avaliacaodevspring.funcionario.FuncionarioService;
 import br.com.sbs.avaliacaodevspring.funcionario.dto.FuncionarioView;
 import br.com.sbs.avaliacaodevspring.realizado.dto.ExameFuncionarioView;
 import br.com.sbs.avaliacaodevspring.realizado.dto.NewExameFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.realizado.dto.UpdateExameFuncionarioForm;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,6 +29,7 @@ public class ExameFuncionarioService {
         this.funcionarioService = funcionarioService;
     }
 
+    @Transactional
     public ExameFuncionarioView save(NewExameFuncionarioForm newExameFuncionarioForm) {
         Exame exame = exameService.getById(newExameFuncionarioForm.exameId());
         Funcionario funcionario = funcionarioService.getById(newExameFuncionarioForm.funcionarioId());
@@ -47,5 +50,23 @@ public class ExameFuncionarioService {
         ExameFuncionario exameFuncionario = exameFuncionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame de funcionario não encontrado, id: %s".formatted(id)));
 
         return new ExameFuncionarioView(exameFuncionario);
+    }
+
+    @Transactional
+    public ExameFuncionarioView update(Long id, UpdateExameFuncionarioForm updateExameFuncionarioForm) {
+        Exame exame = exameService.getById(updateExameFuncionarioForm.exameId());
+        Funcionario funcionario = funcionarioService.getById(updateExameFuncionarioForm.funcionarioId());
+
+        ExameFuncionario exameFuncionario = exameFuncionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame de funcionario não encontrado, id: %s".formatted(id)));
+        exameFuncionario.merge(exame, funcionario);
+
+        return new ExameFuncionarioView(exameFuncionario);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        ExameFuncionario exameFuncionario = exameFuncionarioRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Exame de funcionario não encontrado, id: %s".formatted(id)));
+        exameFuncionarioRepository.delete(exameFuncionario);
     }
 }
