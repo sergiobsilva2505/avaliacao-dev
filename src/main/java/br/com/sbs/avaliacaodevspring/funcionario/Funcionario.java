@@ -1,8 +1,12 @@
 package br.com.sbs.avaliacaodevspring.funcionario;
 
 import br.com.sbs.avaliacaodevspring.funcionario.dto.UpdateFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.realizado.ExameFuncionario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "FUNCIONARIO")
@@ -14,6 +18,9 @@ public class Funcionario {
     @NotBlank
     @Column(name = "nm_funcionario")
     private String nome;
+
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<ExameFuncionario> exameFuncionarios = new ArrayList<>();
 
     public Funcionario() {
     }
@@ -37,6 +44,10 @@ public class Funcionario {
 
     public String getNome() {
         return nome;
+    }
+
+    public List<ExameFuncionario> getExameFuncionarios() {
+        return exameFuncionarios;
     }
 
     @Override
