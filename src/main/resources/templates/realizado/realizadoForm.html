@@ -9,6 +9,7 @@
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
     <div class="container">
+        <div class="alert alert-danger mt-3" role="alert" th:if="${messageError != null}" th:text="${messageError}"></div>
         <form th:action="@{/exames-funcionarios}" th:object="${newExameFuncionarioForm}" method="post">
 
             <div class="card mt-5">
