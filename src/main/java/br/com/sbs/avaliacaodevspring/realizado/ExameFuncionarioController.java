@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -16,9 +17,16 @@ import java.util.Collection;
 public class ExameFuncionarioController {
 
     private final ExameFuncionarioService exameFuncionarioService;
+    private final NewExameFuncionarioFormValidator newExameFuncionarioFormValidator;
 
-    public ExameFuncionarioController(ExameFuncionarioService exameFuncionarioService) {
+    public ExameFuncionarioController(ExameFuncionarioService exameFuncionarioService, NewExameFuncionarioFormValidator newExameFuncionarioFormValidator) {
         this.exameFuncionarioService = exameFuncionarioService;
+        this.newExameFuncionarioFormValidator = newExameFuncionarioFormValidator;
+    }
+
+    @InitBinder("newExameFuncionarioForm")
+    void initBinderNewExameFuncionarioForm(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(newExameFuncionarioFormValidator);
     }
 
     @GetMapping("/form")

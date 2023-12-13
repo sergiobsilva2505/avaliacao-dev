@@ -2,9 +2,10 @@ package br.com.sbs.avaliacaodevspring.realizado.dto;
 
 import br.com.sbs.avaliacaodevspring.realizado.ExameFuncionario;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record ExameFuncionarioView(Long rowid, LocalDateTime realizadoEm, Long exameId, Long funcionarioId) {
+public record ExameFuncionarioView(Long rowid, LocalDate realizadoEm, Long exameId, Long funcionarioId) {
 
    public ExameFuncionarioView(ExameFuncionario exameFuncionario) {
        this(exameFuncionario.getRowid(),
