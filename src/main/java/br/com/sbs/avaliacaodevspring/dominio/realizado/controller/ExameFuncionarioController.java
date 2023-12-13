@@ -39,17 +39,17 @@ public class ExameFuncionarioController {
         return "realizado/realizadoForm";
     }
 
-    @PostMapping
-    public String save(@Valid @ModelAttribute NewExameFuncionarioForm newExameFuncionarioForm, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("messageError", "O funcionário já realizou esse exame");
-            return showForm(newExameFuncionarioForm, model);
-        }
-
-        exameFuncionarioService.save(newExameFuncionarioForm);
-
-        return "redirect:/exames-funcionarios";
-    }
+//    @PostMapping
+//    public String save(@Valid @ModelAttribute NewExameFuncionarioForm newExameFuncionarioForm, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("messageError", "O funcionário já realizou esse exame");
+//            return showForm(newExameFuncionarioForm, model);
+//        }
+//
+//        exameFuncionarioService.save(newExameFuncionarioForm);
+//
+//        return "redirect:/exames-funcionarios";
+//    }
 
     @GetMapping
     public String findAll(Model model) {
@@ -67,15 +67,15 @@ public class ExameFuncionarioController {
         return "realizado/updateForm";
     }
 
-    @PutMapping("/{id}")
-    public String update(@PathVariable Long id, @Valid @ModelAttribute UpdateExameFuncionarioForm updateExameFuncionarioForm, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return showExameRealizado(id, updateExameFuncionarioForm, model);
-        }
-        exameFuncionarioService.update(id, updateExameFuncionarioForm);
-
-        return "redirect:/exames-funcionarios";
-    }
+//    @PutMapping("/{id}")
+//    public String update(@PathVariable Long id, @Valid @ModelAttribute UpdateExameFuncionarioForm updateExameFuncionarioForm, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return showExameRealizado(id, updateExameFuncionarioForm, model);
+//        }
+//        exameFuncionarioService.update(id, updateExameFuncionarioForm);
+//
+//        return "redirect:/exames-funcionarios";
+//    }
 
     @DeleteMapping("/{id}")
     public String deleteById(@PathVariable Long id) {

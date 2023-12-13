@@ -28,16 +28,16 @@ public class ExameFuncionarioService {
         this.funcionarioService = funcionarioService;
     }
 
-    @Transactional
-    public ExameFuncionarioView save(NewExameFuncionarioForm newExameFuncionarioForm) {
-        Exame exame = exameService.getById(newExameFuncionarioForm.exameId());
-        Funcionario funcionario = funcionarioService.getById(newExameFuncionarioForm.funcionarioId());
-
-        ExameFuncionario exameFuncionario = newExameFuncionarioForm.toEntity(exame, funcionario);
-        exameFuncionarioRepository.save(exameFuncionario);
-
-        return new ExameFuncionarioView(exameFuncionario);
-    }
+//    @Transactional
+//    public ExameFuncionarioView save(NewExameFuncionarioForm newExameFuncionarioForm) {
+//        Exame exame = exameService.findById(newExameFuncionarioForm.exameId());
+//        Funcionario funcionario = funcionarioService.getById(newExameFuncionarioForm.funcionarioId());
+//
+//        ExameFuncionario exameFuncionario = newExameFuncionarioForm.toEntity(exame, funcionario);
+//        exameFuncionarioRepository.save(exameFuncionario);
+//
+//        return new ExameFuncionarioView(exameFuncionario);
+//    }
 
     public Collection<ExameFuncionarioView> findAll() {
         Collection<ExameFuncionario> examesFuncionarios = exameFuncionarioRepository.findAll();
@@ -51,16 +51,16 @@ public class ExameFuncionarioService {
         return new ExameFuncionarioView(exameFuncionario);
     }
 
-    @Transactional
-    public ExameFuncionarioView update(Long id, UpdateExameFuncionarioForm updateExameFuncionarioForm) {
-        Exame exame = exameService.getById(updateExameFuncionarioForm.exameId());
-        Funcionario funcionario = funcionarioService.getById(updateExameFuncionarioForm.funcionarioId());
-
-        ExameFuncionario exameFuncionario = exameFuncionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame de funcionario não encontrado, id: %s".formatted(id)));
-        exameFuncionario.merge(exame, funcionario);
-
-        return new ExameFuncionarioView(exameFuncionario);
-    }
+//    @Transactional
+//    public ExameFuncionarioView update(Long id, UpdateExameFuncionarioForm updateExameFuncionarioForm) {
+//        Exame exame = exameService.findById(updateExameFuncionarioForm.exameId());
+//        Funcionario funcionario = funcionarioService.getById(updateExameFuncionarioForm.funcionarioId());
+//
+//        ExameFuncionario exameFuncionario = exameFuncionarioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame de funcionario não encontrado, id: %s".formatted(id)));
+//        exameFuncionario.merge(exame, funcionario);
+//
+//        return new ExameFuncionarioView(exameFuncionario);
+//    }
 
     @Transactional
     public void delete(Long id) {

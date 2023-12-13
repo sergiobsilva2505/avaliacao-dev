@@ -1,18 +1,19 @@
 package br.com.sbs.avaliacaodevspring.dominio.exame.service;
 
-import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.ExameView;
+import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.UpdateExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
 import br.com.sbs.avaliacaodevspring.dominio.exame.repository.ExameRepository;
 import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.DatabaseException;
+import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.ResourceDatabaseException;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
-import org.springframework.dao.DataIntegrityViolationException;
+import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,38 +33,48 @@ public class ExameService {
     }
 
     public Collection<ExameView> findAll() {
-        Collection<Exame> examesVo = (Collection<Exame>) exameRepository.findAll();
+        Collection<Exame> examesVo = exameRepository.findAll();
 
         return examesVo.stream().map(ExameView::new).collect(Collectors.toList());
     }
 
-    public ExameView findById(Long id) {
-        Exame exame = exameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
+    public Exame findById(Long id, boolean isRequestedByAPI) {
+        Optional<Exame> possibleExame = exameRepository.findById(id);
+        if (possibleExame.isEmpty()) {
+            if (isRequestedByAPI) {
+                throw new ResourceNotFoundException("Exame não encontrado id: %s".formatted(id));
+            }
+            throw new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id));
+        }
 
-        return new ExameView(exame);
-    }
-
-    public Exame getById(Long id) {
-        return exameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
+        return possibleExame.get();
     }
 
     @Transactional
-    public ExameView update(Long id, UpdateExameForm updateExameForm) {
-        Exame exame = exameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
+    public ExameView update(Long id, UpdateExameForm updateExameForm, boolean isRequestedByAPI) {
+        Optional<Exame> possibleExame = exameRepository.findById(id);
+        if (possibleExame.isEmpty()) {
+            if (isRequestedByAPI) {
+                throw new ResourceNotFoundException("Exame não encontrado id: %s".formatted(id));
+            }
+            throw new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id));
+        }
+        Exame exame = possibleExame.get();
         exame.merge(updateExameForm);
 
         return new ExameView(exame);
     }
 
     @Transactional
-    public void deleteById(Long id) {
-//        Exame exame = exameRepository.getReferenceById(id);
+    public void deleteById(Long id, boolean isRequestedByAPI) {
         try {
             exameRepository.deleteById(id);
         } catch (Exception ex) {
-//            throw new DatabaseException("Não pode ser deletado! Está associado a outros objetos");
-            System.out.println("=========> Estou no catch");
-            ex.printStackTrace();
+            if (isRequestedByAPI) {
+                throw new ResourceDatabaseException("Não pode ser deletado! Está associado a outros objetos");
+            }
+            throw new DatabaseException("Não pode ser deletado! Está associado a outros objetos");
         }
     }
+
 }

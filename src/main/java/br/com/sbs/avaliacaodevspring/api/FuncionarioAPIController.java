@@ -1,4 +1,4 @@
-package br.com.sbs.avaliacaodevspring.dominio.funcionario.api;
+package br.com.sbs.avaliacaodevspring.api;
 
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.service.FuncionarioService;
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.FuncionarioView;

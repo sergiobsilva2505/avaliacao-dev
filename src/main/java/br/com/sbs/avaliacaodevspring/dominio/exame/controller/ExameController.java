@@ -1,5 +1,6 @@
 package br.com.sbs.avaliacaodevspring.dominio.exame.controller;
 
+import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
 import br.com.sbs.avaliacaodevspring.dominio.exame.service.ExameService;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.ExameView;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/exames")
 public class ExameController {
 
+    private static final boolean IS_API_REQUEST = false;
     private final ExameService exameService;
 
     public ExameController(ExameService exameService) {
@@ -48,8 +50,8 @@ public class ExameController {
 
     @GetMapping("/{id}")
     public String showExame(@PathVariable Long id, UpdateExameForm updateExameForm, Model model) {
-        ExameView exameView = exameService.findById(id);
-        model.addAttribute("exameView", exameView);
+        Exame exame = exameService.findById(id, IS_API_REQUEST);
+        model.addAttribute("exameView", new ExameView(exame));
 
         return "exame/updateForm";
     }
@@ -59,14 +61,14 @@ public class ExameController {
         if (bindingResult.hasErrors()) {
             return showExame(id, updateExameForm, model);
         }
-        exameService.update(id, updateExameForm);
+        exameService.update(id, updateExameForm, IS_API_REQUEST);
 
         return "redirect:/exames";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
-        exameService.deleteById(id);
+        exameService.deleteById(id, IS_API_REQUEST);
 
         return "redirect:/exames";
     }
