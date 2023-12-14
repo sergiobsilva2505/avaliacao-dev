@@ -5,7 +5,6 @@ import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.UpdateExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
 import br.com.sbs.avaliacaodevspring.dominio.exame.service.ExameService;
-import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.ResourceDatabaseException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,6 @@ import java.util.Collection;
 @RequestMapping("/api/exames")
 public class ExameAPIController {
 
-    private final boolean isRequestedByApi = true;
     public final ExameService exameService;
 
     public ExameAPIController(ExameService exameService) {
@@ -42,14 +40,14 @@ public class ExameAPIController {
 
     @GetMapping("/{id}")
     ResponseEntity<ExameView> findById(@PathVariable Long id) {
-        Exame exame = exameService.findById(id, isRequestedByApi);
+        Exame exame = exameService.findById(id);
 
         return ResponseEntity.ok().body(new ExameView(exame));
     }
 
     @PutMapping("/{id}")
     ResponseEntity<ExameView> update(@PathVariable Long id, @Valid @RequestBody UpdateExameForm updateExameForm) {
-        ExameView exame = exameService.update(id, updateExameForm, isRequestedByApi);
+        ExameView exame = exameService.update(id, updateExameForm);
 
         return ResponseEntity.ok(exame);
     }

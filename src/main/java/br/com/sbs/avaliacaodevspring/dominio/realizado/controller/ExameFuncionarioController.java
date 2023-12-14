@@ -1,18 +1,17 @@
 package br.com.sbs.avaliacaodevspring.dominio.realizado.controller;
 
-import br.com.sbs.avaliacaodevspring.dominio.realizado.entity.ExameFuncionario;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.service.ExameFuncionarioService;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.validator.NewExameFuncionarioFormValidator;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.ExameFuncionarioView;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.NewExameFuncionarioForm;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.UpdateExameFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.dominio.realizado.entity.ExameFuncionario;
+import br.com.sbs.avaliacaodevspring.dominio.realizado.service.ExameFuncionarioService;
+import br.com.sbs.avaliacaodevspring.dominio.realizado.validator.NewExameFuncionarioFormValidator;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collection;
 
@@ -20,7 +19,6 @@ import java.util.Collection;
 @RequestMapping("/exames-funcionarios")
 public class ExameFuncionarioController {
 
-    private final boolean isRequestesByAPI = false;
     private final ExameFuncionarioService exameFuncionarioService;
     private final NewExameFuncionarioFormValidator newExameFuncionarioFormValidator;
 
@@ -48,7 +46,7 @@ public class ExameFuncionarioController {
             return showForm(newExameFuncionarioForm, model);
         }
 
-        exameFuncionarioService.save(newExameFuncionarioForm, isRequestesByAPI);
+        exameFuncionarioService.save(newExameFuncionarioForm);
 
         return "redirect:/exames-funcionarios";
     }
@@ -63,7 +61,7 @@ public class ExameFuncionarioController {
 
     @GetMapping("/{id}")
     public String showExameRealizado(@PathVariable Long id, UpdateExameFuncionarioForm updateExameFuncionarioForm, Model model) {
-        ExameFuncionario exameFuncionario = exameFuncionarioService.findById(id, isRequestesByAPI);
+        ExameFuncionario exameFuncionario = exameFuncionarioService.findById(id);
         model.addAttribute("exameFuncionarioView", new ExameFuncionarioView(exameFuncionario));
 
         return "realizado/updateForm";
@@ -74,14 +72,14 @@ public class ExameFuncionarioController {
         if (bindingResult.hasErrors()) {
             return showExameRealizado(id, updateExameFuncionarioForm, model);
         }
-        exameFuncionarioService.update(id, updateExameFuncionarioForm, isRequestesByAPI);
+        exameFuncionarioService.update(id, updateExameFuncionarioForm);
 
         return "redirect:/exames-funcionarios";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteById(@PathVariable Long id, boolean isRequestesByAPI) {
-        exameFuncionarioService.delete(id, isRequestesByAPI);
+    public String deleteById(@PathVariable Long id) {
+        exameFuncionarioService.delete(id);
 
         return "redirect:/exames-funcionarios";
     }

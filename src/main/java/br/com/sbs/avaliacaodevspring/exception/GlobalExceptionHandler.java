@@ -8,8 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ObjectNotFoundException.class)
-    public ModelAndView notFoundException(ObjectNotFoundException exception) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ModelAndView notFoundException(ResourceNotFoundException exception) {
         ModelAndView modelAndView = new ModelAndView("exception/page404");
         modelAndView.addObject("message", exception.getMessage());
 
@@ -28,6 +28,14 @@ public class GlobalExceptionHandler {
     public ModelAndView businessException(BusinessException exception) {
         ModelAndView modelAndView = new ModelAndView("exception/page400");
         modelAndView.addObject("message", exception.getMessage());
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView exception(Exception exception) {
+        ModelAndView modelAndView = new ModelAndView("exception/page500");
+        modelAndView.addObject("message", "Ocorreu um erro interno");
 
         return modelAndView;
     }

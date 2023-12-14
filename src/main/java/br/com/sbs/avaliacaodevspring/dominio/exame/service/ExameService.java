@@ -5,19 +5,14 @@ import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.UpdateExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
 import br.com.sbs.avaliacaodevspring.dominio.exame.repository.ExameRepository;
-import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.DatabaseException;
-import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.ResourceDatabaseException;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.entity.ExameFuncionario;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.repository.ExameFuncionarioRepository;
 import br.com.sbs.avaliacaodevspring.exception.BusinessException;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,28 +39,13 @@ public class ExameService {
         return examesVo.stream().map(ExameView::new).collect(Collectors.toList());
     }
 
-    public Exame findById(Long id, boolean isRequestedByAPI) {
-        Optional<Exame> possibleExame = exameRepository.findById(id);
-        if (possibleExame.isEmpty()) {
-            if (isRequestedByAPI) {
-                throw new ResourceNotFoundException("Exame não encontrado id: %s".formatted(id));
-            }
-            throw new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id));
-        }
-
-        return possibleExame.get();
+    public Exame findById(Long id) {
+        return exameRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
     }
 
     @Transactional
-    public ExameView update(Long id, UpdateExameForm updateExameForm, boolean isRequestedByAPI) {
-        Optional<Exame> possibleExame = exameRepository.findById(id);
-        if (possibleExame.isEmpty()) {
-            if (isRequestedByAPI) {
-                throw new ResourceNotFoundException("Exame não encontrado id: %s".formatted(id));
-            }
-            throw new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id));
-        }
-        Exame exame = possibleExame.get();
+    public ExameView update(Long id, UpdateExameForm updateExameForm) {
+        Exame exame = exameRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Exame não encontrado id: %s".formatted(id)));
         exame.merge(updateExameForm);
 
         return new ExameView(exame);
@@ -74,7 +54,7 @@ public class ExameService {
     @Transactional
     public void deleteById(Long id) {
         if (exameFuncionarioRepository.existsByExame_Rowid(id)) {
-            throw new BusinessException("Não pode ser apagado");
+            throw new BusinessException("Violação da integridade da base dados. Este recurso possui chave estrangeira.");
         }
         exameRepository.deleteById(id);
     }

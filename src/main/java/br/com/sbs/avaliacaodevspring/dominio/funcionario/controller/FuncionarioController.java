@@ -1,10 +1,10 @@
 package br.com.sbs.avaliacaodevspring.dominio.funcionario.controller;
 
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.entity.Funcionario;
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.service.FuncionarioService;
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.FuncionarioView;
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.NewFuncionarioForm;
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.UpdateFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.dominio.funcionario.entity.Funcionario;
+import br.com.sbs.avaliacaodevspring.dominio.funcionario.service.FuncionarioService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,6 @@ import java.util.Collection;
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
 
-    private final boolean isRequestedByApi = false;
     private final FuncionarioService funcionarioService;
 
     public FuncionarioController(FuncionarioService funcionarioService) {
@@ -51,7 +50,7 @@ public class FuncionarioController {
 
     @GetMapping("/{id}")
     public String showFuncionario(@PathVariable Long id, UpdateFuncionarioForm updateFuncionarioForm, Model model) {
-        Funcionario funcionario = funcionarioService.findById(id, isRequestedByApi);
+        Funcionario funcionario = funcionarioService.findById(id);
         model.addAttribute("funcionarioView", new FuncionarioView(funcionario));
 
         return "funcionario/updateForm";
@@ -63,7 +62,7 @@ public class FuncionarioController {
             return showFuncionario(id, updateFuncionarioForm, model);
         }
 
-        Funcionario funcionario = funcionarioService.update(id, updateFuncionarioForm, isRequestedByApi);
+        Funcionario funcionario = funcionarioService.update(id, updateFuncionarioForm);
         model.addAttribute("funcionarioView", new FuncionarioView(funcionario));
 
         return "redirect:/funcionarios";

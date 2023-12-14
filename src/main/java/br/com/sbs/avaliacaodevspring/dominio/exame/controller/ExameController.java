@@ -1,10 +1,10 @@
 package br.com.sbs.avaliacaodevspring.dominio.exame.controller;
 
-import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
-import br.com.sbs.avaliacaodevspring.dominio.exame.service.ExameService;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.ExameView;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.UpdateExameForm;
+import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
+import br.com.sbs.avaliacaodevspring.dominio.exame.service.ExameService;
 import br.com.sbs.avaliacaodevspring.filter.OpcoesComboBuscarExames;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/exames")
 public class ExameController {
 
-    private static final boolean IS_API_REQUEST = false;
     private final ExameService exameService;
 
     public ExameController(ExameService exameService) {
@@ -50,7 +49,7 @@ public class ExameController {
 
     @GetMapping("/{id}")
     public String showExame(@PathVariable Long id, UpdateExameForm updateExameForm, Model model) {
-        Exame exame = exameService.findById(id, IS_API_REQUEST);
+        Exame exame = exameService.findById(id);
         model.addAttribute("exameView", new ExameView(exame));
 
         return "exame/updateForm";
@@ -61,7 +60,7 @@ public class ExameController {
         if (bindingResult.hasErrors()) {
             return showExame(id, updateExameForm, model);
         }
-        exameService.update(id, updateExameForm, IS_API_REQUEST);
+        exameService.update(id, updateExameForm);
 
         return "redirect:/exames";
     }
