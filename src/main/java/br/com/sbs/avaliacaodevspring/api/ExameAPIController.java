@@ -5,6 +5,7 @@ import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.dto.UpdateExameForm;
 import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
 import br.com.sbs.avaliacaodevspring.dominio.exame.service.ExameService;
+import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.ResourceDatabaseException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import java.util.Collection;
 @RequestMapping("/api/exames")
 public class ExameAPIController {
 
-    private static final boolean IS_REQUESTED_BY_API = true;
+    private final boolean isRequestedByApi = true;
     public final ExameService exameService;
 
     public ExameAPIController(ExameService exameService) {
@@ -41,21 +42,26 @@ public class ExameAPIController {
 
     @GetMapping("/{id}")
     ResponseEntity<ExameView> findById(@PathVariable Long id) {
-        Exame exame = exameService.findById(id, IS_REQUESTED_BY_API);
+        Exame exame = exameService.findById(id, isRequestedByApi);
 
         return ResponseEntity.ok().body(new ExameView(exame));
     }
 
     @PutMapping("/{id}")
     ResponseEntity<ExameView> update(@PathVariable Long id, @Valid @RequestBody UpdateExameForm updateExameForm) {
-        ExameView exame = exameService.update(id, updateExameForm, IS_REQUESTED_BY_API);
+        ExameView exame = exameService.update(id, updateExameForm, isRequestedByApi);
 
         return ResponseEntity.ok(exame);
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity deleteById(@PathVariable Long id) {
-        exameService.deleteById(id, IS_REQUESTED_BY_API);
+        try {
+            System.out.println("Pegou na Controller");
+            exameService.deleteById(id, isRequestedByApi);
+        } catch (org.springframework.dao.DataIntegrityViolationException ex) {
+            throw new ResourceDatabaseException("Não pode ser deletado!");
+        }
 
         return ResponseEntity.noContent().build();
     }

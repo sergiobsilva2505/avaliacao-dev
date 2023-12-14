@@ -1,5 +1,6 @@
 package br.com.sbs.avaliacaodevspring.dominio.funcionario.controller;
 
+import br.com.sbs.avaliacaodevspring.dominio.funcionario.entity.Funcionario;
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.service.FuncionarioService;
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.FuncionarioView;
 import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.NewFuncionarioForm;
@@ -16,6 +17,7 @@ import java.util.Collection;
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
 
+    private final boolean isRequestedByApi = false;
     private final FuncionarioService funcionarioService;
 
     public FuncionarioController(FuncionarioService funcionarioService) {
@@ -49,8 +51,8 @@ public class FuncionarioController {
 
     @GetMapping("/{id}")
     public String showFuncionario(@PathVariable Long id, UpdateFuncionarioForm updateFuncionarioForm, Model model) {
-        FuncionarioView funcionarioView = funcionarioService.findById(id);
-        model.addAttribute("funcionarioView", funcionarioView);
+        Funcionario funcionario = funcionarioService.findById(id, isRequestedByApi);
+        model.addAttribute("funcionarioView", new FuncionarioView(funcionario));
 
         return "funcionario/updateForm";
     }
@@ -61,15 +63,15 @@ public class FuncionarioController {
             return showFuncionario(id, updateFuncionarioForm, model);
         }
 
-        FuncionarioView funcionarioView = funcionarioService.update(id, updateFuncionarioForm);
-        model.addAttribute("funcionarioView", funcionarioView);
+        Funcionario funcionario = funcionarioService.update(id, updateFuncionarioForm, isRequestedByApi);
+        model.addAttribute("funcionarioView", new FuncionarioView(funcionario));
 
         return "redirect:/funcionarios";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-        funcionarioService.deleteById(id);
+    public String delete(@PathVariable Long id, boolean isRequestedByApi) {
+        funcionarioService.deleteById(id, isRequestedByApi);
 
         return "redirect:/funcionarios";
     }
