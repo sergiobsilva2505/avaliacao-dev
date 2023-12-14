@@ -24,8 +24,8 @@ public class UpdateExameFuncionarioFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         UpdateExameFuncionarioForm form = (UpdateExameFuncionarioForm) target;
 
-//        if (exameFuncionarioRepository.existsByExameAndFuncionarioAndDateAndIdNot(form.exameId(), form.funcionarioId())) {
-//            errors.reject("exame.funcionario.exists.already");
-//        }
+        if (exameFuncionarioRepository.existsByExameAndFuncionarioAndDateAndIdNot(form.exameId(), form.funcionarioId(), form.rowid())) {
+            errors.reject("exame.funcionario.exists.already");
+        }
     }
 }
