@@ -9,7 +9,7 @@
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
     <div class="container">
-        <form th:action="@{/exames-funcionarios/{id}(id=${exameFuncionario.rowid})}" th:object="${updateExameFuncionarioForm}" method="post">
+        <form th:action="@{/exames-funcionarios/{id}(id=${exameFuncionarioView.rowid})}" th:object="${updateExameFuncionarioForm}" method="post">
             <input type="hidden" name="_method" value="put">
 
             <div class="card mt-5">
@@ -27,37 +27,31 @@
 
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <label for="rowid" class="col-sm-2 col-form-label text-center">Código:</label>
+                        <label for="rowid" class="col-sm-1 col-form-label text-center">
+                            Código:
+                        </label>
+
                         <div class="col-sm-2">
-                            <input th:field="${exameFuncionario.rowid}" th:value="${exameFuncionario.rowid}" type="text"
+                            <input th:field="${exameFuncionarioView.rowid}" th:value="${exameFuncionarioView.rowid}" type="text"
                                    class="form-control" id="rowid" readonly="true"/>
                         </div>
                     </div>
 
                     <div class="row align-items-center mt-3">
-                        <label for="exames" class="col-sm-2 col-form-label text-end">Cód. exame:</label>
+                        <label for="exameId" class="col-sm-2 col-form-label text-end">Cód. exame:</label>
                         <div class="col-sm-4">
-                            <input th:field="${exameFuncionario.exameId}"
-                                   th:value="${exameFuncionario.exameId}"
-                                   class="form-control"
-                                   th:list="examesList"
-                                   id="exames"
-                                   placeholder="Digite para pesquisar..."
-                            >
-                            <datalist id="examesList">
-                                <option th:each="exame : ${exames}"  th:value="${exame.rowid} == exameFuncionario.exameId ? exame.nome}" th:text="${exame.nomeExame}">[[]]
-                            </datalist>
-<!--                            <span style="color: red" th:if="${#fields.hasErrors('exameId')}" th:errors="*{exameId}"></span>-->
+                            <input th:field="${exameFuncionarioView.exameId}" th:value="${exameFuncionarioView.exameId}" type="number" class="form-control"  id="exameId" name="exameId"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('exameId')}" th:errors="*{exameId}"></span>
                         </div>
                     </div>
 
-<!--                    <div class="row align-items-center mt-3">-->
-<!--                        <label for="funcionarioId" class="col-sm-2 col-form-label text-end">Cod. funcionario:</label>-->
-<!--                        <div class="col-sm-4">-->
-<!--                            <input class="form-control" type="number" th:field="${exameFuncionario.funcionarioId}" th:value="${exameFuncionario.funcionarioId}" id="funcionarioId" name="funcionarioId"/>-->
-<!--                            <span style="color: red" th:if="${#fields.hasErrors('funcionarioId')}" th:errors="*{funcionarioId}"></span>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="row align-items-center mt-3">
+                        <label for="funcionarioId" class="col-sm-2 col-form-label text-end">Cod. funcionario:</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="number" th:field="${exameFuncionarioView.funcionarioId}" th:value="${exameFuncionarioView.funcionarioId}" id="funcionarioId" name="funcionarioId"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('funcionarioId')}" th:errors="*{funcionarioId}"></span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-footer">
