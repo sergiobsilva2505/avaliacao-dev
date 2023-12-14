@@ -68,7 +68,7 @@ public class ExameController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
-        exameService.deleteById(id, IS_API_REQUEST);
+        exameService.deleteById(id);
 
         return "redirect:/exames";
     }

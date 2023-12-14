@@ -7,6 +7,9 @@ import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
 import br.com.sbs.avaliacaodevspring.dominio.exame.repository.ExameRepository;
 import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.DatabaseException;
 import br.com.sbs.avaliacaodevspring.dominio.exame.service.exception.ResourceDatabaseException;
+import br.com.sbs.avaliacaodevspring.dominio.realizado.entity.ExameFuncionario;
+import br.com.sbs.avaliacaodevspring.dominio.realizado.repository.ExameFuncionarioRepository;
+import br.com.sbs.avaliacaodevspring.exception.BusinessException;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,9 +24,11 @@ import java.util.stream.Collectors;
 public class ExameService {
 
     private final ExameRepository exameRepository;
+    private final ExameFuncionarioRepository exameFuncionarioRepository;
 
-    public ExameService(ExameRepository exameRepository) {
+    public ExameService(ExameRepository exameRepository, ExameFuncionarioRepository exameFuncionarioRepository) {
         this.exameRepository = exameRepository;
+        this.exameFuncionarioRepository = exameFuncionarioRepository;
     }
 
     @Transactional
@@ -67,16 +72,11 @@ public class ExameService {
     }
 
     @Transactional
-    public void deleteById(Long id, boolean isRequestedByAPI) {
-        String message = "Não pode ser deletado! Está associado a outros objetos";
-        try {
-            exameRepository.deleteById(id);
-        } catch (DataIntegrityViolationException ex) {
-            if (isRequestedByAPI) {
-                throw new ResourceDatabaseException(message);
-            }
-            throw new DatabaseException(message);
+    public void deleteById(Long id) {
+        if (exameFuncionarioRepository.existsByExame_Rowid(id)) {
+            throw new BusinessException("Não pode ser apagado");
         }
+        exameRepository.deleteById(id);
     }
 
 }

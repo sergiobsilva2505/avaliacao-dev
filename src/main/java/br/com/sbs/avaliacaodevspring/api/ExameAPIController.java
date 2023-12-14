@@ -56,12 +56,7 @@ public class ExameAPIController {
 
     @DeleteMapping("/{id}")
     ResponseEntity deleteById(@PathVariable Long id) {
-        try {
-            System.out.println("Pegou na Controller");
-            exameService.deleteById(id, isRequestedByApi);
-        } catch (org.springframework.dao.DataIntegrityViolationException ex) {
-            throw new ResourceDatabaseException("Não pode ser deletado!");
-        }
+        exameService.deleteById(id);
 
         return ResponseEntity.noContent().build();
     }
