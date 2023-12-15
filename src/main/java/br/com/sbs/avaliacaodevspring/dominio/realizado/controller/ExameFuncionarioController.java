@@ -1,5 +1,6 @@
 package br.com.sbs.avaliacaodevspring.dominio.realizado.controller;
 
+import br.com.sbs.avaliacaodevspring.dominio.exame.service.ExameService;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.ExameFuncionarioView;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.NewExameFuncionarioForm;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.UpdateExameFuncionarioForm;
@@ -21,10 +22,12 @@ public class ExameFuncionarioController {
 
     private final ExameFuncionarioService exameFuncionarioService;
     private final NewExameFuncionarioFormValidator newExameFuncionarioFormValidator;
+    private final ExameService exameService;
 
-    public ExameFuncionarioController(ExameFuncionarioService exameFuncionarioService, NewExameFuncionarioFormValidator newExameFuncionarioFormValidator) {
+    public ExameFuncionarioController(ExameFuncionarioService exameFuncionarioService, NewExameFuncionarioFormValidator newExameFuncionarioFormValidator, ExameService exameService) {
         this.exameFuncionarioService = exameFuncionarioService;
         this.newExameFuncionarioFormValidator = newExameFuncionarioFormValidator;
+        this.exameService = exameService;
     }
 
     @InitBinder("newExameFuncionarioForm")
@@ -35,6 +38,7 @@ public class ExameFuncionarioController {
     @GetMapping("/form")
     public String showForm(NewExameFuncionarioForm newExameFuncionarioForm, Model model) {
         model.addAttribute("newExameFuncionarioForm", newExameFuncionarioForm);
+        model.addAttribute("exames", exameService.findAll());
 
         return "realizado/realizadoForm";
     }

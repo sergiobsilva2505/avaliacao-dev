@@ -10,10 +10,14 @@ import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.UpdateExameFuncionari
 import br.com.sbs.avaliacaodevspring.dominio.realizado.entity.ExameFuncionario;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.repository.ExameFuncionarioRepository;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
+import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
+import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodDTO;
+import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodForm;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class ExameFuncionarioService {
@@ -63,5 +67,9 @@ public class ExameFuncionarioService {
     @Transactional
     public void delete(Long id) {
         exameFuncionarioRepository.deleteById(id);
+    }
+
+    public List<ReportByPeriod> getReportByPeriod(ReportByPeriodForm reportByPeriodForm) {
+        return exameFuncionarioRepository.getReportByPeriod(reportByPeriodForm.initialDate(), reportByPeriodForm.finishDate());
     }
 }

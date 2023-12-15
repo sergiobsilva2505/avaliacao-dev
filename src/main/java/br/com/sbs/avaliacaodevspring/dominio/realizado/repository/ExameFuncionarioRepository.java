@@ -1,13 +1,14 @@
 package br.com.sbs.avaliacaodevspring.dominio.realizado.repository;
 
-import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.entity.Funcionario;
 import br.com.sbs.avaliacaodevspring.dominio.realizado.entity.ExameFuncionario;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
+import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
+import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface ExameFuncionarioRepository extends JpaRepository<ExameFuncionario, Long> {
 
@@ -23,7 +24,14 @@ public interface ExameFuncionarioRepository extends JpaRepository<ExameFuncionar
         return existsByExame_RowidAndFuncionario_RowidAndRealizadoEmAndRowidNot(exameId, funcionarioId, LocalDate.now(), rowid);
     }
 
-
-
     boolean existsByExame_Rowid(Long exame_rowid);
+
+    @Query(value = """
+            SELECT fc.rowid AS rowIdEmployee, fc.nm_funcionario AS nomeEmployee, ex.rowid AS rowIdExam, ex.nm_exame AS nomeExam, ef.realizado_em AS createdAt FROM EXAME_FUNCIONARIO ef
+                JOIN EXAME ex ON ex.rowid = ef.exame_id
+                JOIN FUNCIONARIO fc ON fc.rowid = ef.funcionario_id
+                WHERE ef.realizado_em BETWEEN  :initialDate AND :finishDate
+            """, nativeQuery = true)
+    List<ReportByPeriod> getReportByPeriod(@Param("initialDate") LocalDate initialDate, @Param("finishDate") LocalDate finishDate);
+
 }

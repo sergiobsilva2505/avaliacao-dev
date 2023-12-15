@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Relatorio Exames por Periodo</title>
+</head>
+<body class="bg-secondary">
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div>
+            <form th:action="@{/relatorios}" th:object="${reportByPeriodForm}" method="post">
+
+                <div class="card mb-5">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm">
+                                <h5 class="card-title text-center">Relatorio de exames por periodo</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row align-items-center mt-3">
+                            <label for="initialDate" class="col-sm-2 col-form-label text-end">Data inicial:</label>
+                            <div class="col-sm-4">
+                                <input th:field="*{initialDate}" type="date" class="form-control" id="initialDate"
+                                       name="initialDate"/>
+                                <span style="color: red" th:if="${#fields.hasErrors('initialDate')}"
+                                      th:errors="*{initialDate}"></span>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-3">
+                            <label for="finishDate" class="col-sm-2 col-form-label text-end">Data final:</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="date" th:field="*{finishDate}" id="finishDate"
+                                       name="finishDate"/>
+                                <span style="color: red" th:if="${#fields.hasErrors('finishDate')}"
+                                      th:errors="*{finishDate}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-primary col-sm-4 offset-sm-1">Salvar</button>
+                            <button type="reset" class="btn btn-secondary col-sm-4 offset-sm-2">Limpar Formulario
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <table class="table table-light table-striped align-middle">
+                <thead>
+                <tr>
+                    <th>ID FUNC.</th>
+                    <th>NOME DO FUNCIONARIO</th>
+                    <th>ID EXAME</th>
+                    <th>NOME DO EXAME</th>
+                    <th>DATA DA REALIZAÇÃO</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="row : ${rows}">
+                    <td th:text="#{row.getrowidemployee}"></td>
+                    <td th:text="#{row.getNomeEmployee()}"></td>
+                    <td th:text="#{row.getRowIdExam()}"></td>
+                    <td th:text="#{row.getNomeExam()}"></td>
+                    <td th:text="#{#temporals.format(row.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
+<!--                    <td th:text="#{row.rowidemployee}">${row.rowIdEmployee}</td>-->
+<!--                    <td th:text="#{row.nomeEmployee}"></td>-->
+<!--                    <td th:text="#{row.rowIdExam}"></td>-->
+<!--                    <td th:text="#{row.nomeExam}"></td>-->
+<!--                    <td th:text="#{#temporals.format(row.createdAt, 'dd/MM/yyyy HH:mm')}"></td>-->
+<!--                    <td th:text="#{row.getrowidemployee}">${row.rowIdEmployee}</td>-->
+<!--                    <td th:text="#{row.getNomeEmployee}"></td>-->
+<!--                    <td th:text="#{row.getRowIdExam}"></td>-->
+<!--                    <td th:text="#{row.getNomeExam}"></td>-->
+<!--                    <td th:text="#{#temporals.format(row.getCreatedAt, 'dd/MM/yyyy HH:mm')}"></td>-->
+<!--                    <td th:text="#{row.getrowidemployee()}">${row.rowIdEmployee}</td>-->
+<!--                    <td th:text="#{row.getNomeEmployee()}"></td>-->
+<!--                    <td th:text="#{row.getRowIdExam()}"></td>-->
+<!--                    <td th:text="#{row.getNomeExam()}"></td>-->
+<!--                    <td th:text="#{#temporals.format(row.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>-->
+                </tr>
+                </tbody>
+
+                <tfoot class="table-secondary">
+                <tr>
+                    <td colspan="5">
+                        [[${rows}]]
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+</body>
+</html>

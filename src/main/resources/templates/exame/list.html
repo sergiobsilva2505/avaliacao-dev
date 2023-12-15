@@ -10,24 +10,6 @@
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
     <div class="container">
-        <div class="row mt-5 mb-2">
-            <div class="col-sm p-0">
-                <form action="/filtrarExames.action">
-                    <div class="input-group">
-                        <label class="input-group-text" for="opcoesCombo">
-                            <strong>BUSCAR POR:</strong>
-                        </label>
-                        <select class="form-select" id="opcoesCombo">
-                            <option value="">Escolha</option>
-                            <option th:each="opcao : ${opcoesComBuscarExames}" th:value="${opcao}" th:text="${opcao.descricao}"></option>
-                        </select>
-                        <input class="form-control" id="nome" name="filtrar.valorBusca">
-                        <button class="btn btn-primary" type="submit">PESQUISAR</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <div class="row">
             <table class="table table-light table-striped align-middle">
                 <thead>

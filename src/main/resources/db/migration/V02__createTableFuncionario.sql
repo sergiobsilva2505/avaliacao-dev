@@ -3,4 +3,7 @@ INSERT INTO funcionario (nm_funcionario)
 VALUES ('Danilo Roberto Daniel Fernandes'),
        ('Yago Marcelo Vitor da Conceição'),
        ('Luís Cauê Cavalcanti'),
-       ('Larissa Aurora Luciana Brito');
+       ('Larissa Aurora Luciana Brito'),
+       ('Erick Lucas Aparício'),
+       ('Tiago Ruan Guilherme Freitas'),
+       ('Renato Joaquim Thales Souza');
