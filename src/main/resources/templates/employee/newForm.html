@@ -4,51 +4,44 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{template.html}">
 <head>
-    <title>ExamesRealizados</title>
+    <title>CadastroFuncionarios</title>
 </head>
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
     <div class="container">
-        <div class="alert alert-danger mt-3" role="alert" th:if="${messageError != null}" th:text="${messageError}"></div>
-        <form th:action="@{/exames-funcionarios}" th:object="${newEmployeeExamForm}" method="post">
+        <form th:action="@{/funcionarios}" th:object="${newEmployeeForm}" method="post">
 
             <div class="card mt-5">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-5">
-                            <a th:href="@{/exames-funcionarios}" class="btn btn-success">Exames realizados</a>
+                            <a th:href="@{/funcionarios}" class="btn btn-success">Funcionarios</a>
                         </div>
 
                         <div class="col-sm">
-                            <h5 class="card-title">Exame funcionário</h5>
+                            <h5 class="card-title">Novo Funcionario</h5>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <label for="rowid" class="col-sm-2 col-form-label text-end">Código:</label>
+                        <label for="rowid" class="col-sm-1 col-form-label text-center">
+                            Código:
+                        </label>
 
                         <div class="col-sm-2">
                             <input type="text" class="form-control" id="rowid" name="rowid" readonly="true"/>
                         </div>
                     </div>
-                    <div class="row align-items-center mt-3">
-                        <label for="examId" class="col-sm-2 col-form-label text-end">Cód. exam:</label>
-                        <div class="col-sm-4">
-                            <input th:field="*{examId}" type="number" class="form-control"  id="examId" name="examId"/>
-                            <span style="color: red" th:if="${#fields.hasErrors('examId')}" th:errors="*{examId}"></span>
-                        </div>
-                    </div>
 
                     <div class="row align-items-center mt-3">
-                        <label for="employeeId" class="col-sm-2 col-form-label text-end">Cod. employee:</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="number" th:field="*{employeeId}" id="employeeId" name="employeeId"/>
-                            <span style="color: red" th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></span>
+                        <label for="name" class="col-sm-1 col-form-label text-center">Nome:</label>
+                        <div class="col-sm-5">
+                            <input th:field="*{name}" class="form-control" id="name" name="name"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="card-footer">

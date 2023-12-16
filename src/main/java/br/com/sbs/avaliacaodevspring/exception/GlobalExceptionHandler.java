@@ -43,6 +43,7 @@ public class GlobalExceptionHandler {
     public ModelAndView exception(Exception exception) {
         ModelAndView modelAndView = new ModelAndView("exception/page500");
         modelAndView.addObject("message", "Ocorreu um erro interno");
+        exception.printStackTrace();
 
         return modelAndView;
     }

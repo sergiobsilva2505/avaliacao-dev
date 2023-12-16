@@ -1,6 +1,6 @@
 package br.com.sbs.avaliacaodevspring.api;
 
-import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionarioService;
+import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamService;
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodForm;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +15,15 @@ import java.util.List;
 @RequestMapping("/api/relatorios")
 public class ReportAPIController {
 
-    private final ExameFuncionarioService exameFuncionarioService;
+    private final EmployeeExamService employeeExamService;
 
-    public ReportAPIController(ExameFuncionarioService exameFuncionarioService) {
-        this.exameFuncionarioService = exameFuncionarioService;
+    public ReportAPIController(EmployeeExamService employeeExamService) {
+        this.employeeExamService = employeeExamService;
     }
 
     @PostMapping
     ResponseEntity<List<ReportByPeriod>> showForm(@RequestBody ReportByPeriodForm reportByPeriodForm) {
-        List<ReportByPeriod> rows = exameFuncionarioService.getReportByPeriod(reportByPeriodForm);
+        List<ReportByPeriod> rows = employeeExamService.getReportByPeriod(reportByPeriodForm);
 
         return ResponseEntity.ok(rows);
     }

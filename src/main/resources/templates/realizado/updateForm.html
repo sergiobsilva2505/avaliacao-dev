@@ -9,7 +9,7 @@
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
     <div class="container">
-        <form th:action="@{/exames-funcionarios/{id}(id=${exameFuncionarioView.rowid})}" th:object="${updateExameFuncionarioForm}" method="post">
+        <form th:action="@{/exames-funcionarios/{id}(id=${employeeExamView.rowid})}" th:object="${updateEmployeeExamForm}" method="post">
             <input type="hidden" name="_method" value="put">
 
             <div class="card mt-5">
@@ -32,23 +32,23 @@
                         </label>
 
                         <div class="col-sm-2">
-                            <input th:field="${exameFuncionarioView.rowid}" th:value="${exameFuncionarioView.rowid}" type="text"
+                            <input th:field="${employeeExamView.rowid}" th:value="${employeeExamView.rowid}" type="text"
                                    class="form-control" id="rowid" readonly="true"/>
                         </div>
                     </div>
 
                     <div class="row align-items-center mt-3">
-                        <label for="exameId" class="col-sm-2 col-form-label text-end">Cód. exame:</label>
+                        <label for="examId" class="col-sm-2 col-form-label text-end">Cód. exam:</label>
                         <div class="col-sm-4">
-                            <input th:field="${exameFuncionarioView.exameId}" th:value="${exameFuncionarioView.exameId}" type="number" class="form-control"  id="exameId" name="exameId"/>
-                            <span style="color: red" th:if="${#fields.hasErrors('exameId')}" th:errors="*{exameId}"></span>
+                            <input th:field="${employeeExamView.examId}" th:value="${employeeExamView.examId}" type="number" class="form-control"  id="examId" name="examId"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('examId')}" th:errors="*{examId}"></span>
                         </div>
                     </div>
                     <div class="row align-items-center mt-3">
-                        <label for="funcionarioId" class="col-sm-2 col-form-label text-end">Cod. funcionario:</label>
+                        <label for="employeeId" class="col-sm-2 col-form-label text-end">Cod. employee:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="number" th:field="${exameFuncionarioView.funcionarioId}" th:value="${exameFuncionarioView.funcionarioId}" id="funcionarioId" name="funcionarioId"/>
-                            <span style="color: red" th:if="${#fields.hasErrors('funcionarioId')}" th:errors="*{funcionarioId}"></span>
+                            <input class="form-control" type="number" th:field="${employeeExamView.employeeId}" th:value="${employeeExamView.employeeId}" id="employeeId" name="employeeId"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></span>
                         </div>
                     </div>
                 </div>

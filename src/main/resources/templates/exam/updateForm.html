@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>CadastroExame</title>
+</head>
+<body class="bg-secondary">
+<div layout:fragment="conteudo">
+    <div class="container">
+        <form th:action="@{/exames/{id}(id=${exameView.rowid})}" th:object="${updateExamForm}" method="post">
+            <input type="hidden" name="_method" value="put">
+
+            <div class="card mt-5">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <a th:href="@{/exames}" class="btn btn-success">Exames</a>
+                        </div>
+
+                        <div class="col-sm">
+                            <h5 class="card-title">Atualiza Exame</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <label for="rowid" class="col-sm-1 col-form-label text-center">
+                            Código:
+                        </label>
+
+                        <div class="col-sm-2">
+                            <input th:field="${exameView.rowid}" th:value="${exameView.rowid}" type="text"
+                                   class="form-control" id="rowid" readonly="true"/>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center mt-3">
+                        <label for="name" class="col-sm-1 col-form-label text-center">Nome:</label>
+                        <div class="col-sm-5">
+                            <input th:field="${exameView.name}" th:value="${exameView.name}" class="form-control"
+                                   id="name"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-primary col-sm-4 offset-sm-1">Salvar</button>
+                        <button type="reset" class="btn btn-secondary col-sm-4 offset-sm-2">Limpar Formulario</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -4,7 +4,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{template.html}">
 <head>
-    <title>CadastrarExamesFuncionarios</title>
+    <meta charset="UTF-8">
+    <title>CadastrarExames</title>
 </head>
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
@@ -14,32 +15,27 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>REALIZADO EM</th>
-                    <th>EXAME</th>
-                    <th>FUNCIONARIO</th>
+                    <th>NAME</th>
                     <th class="text-end mt-5">AÇÃO</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="employeeExam : ${employeeExamViews}">
-                    <td th:text="${employeeExam.rowid}"></td>
-                    <td th:text="${#temporals.format(employeeExam.accomplishedIn, 'dd/MM/yyyy HH:mm')}"></td>
-                    <td th:text="${employeeExam.examId}"></td>
-                    <td th:text="${employeeExam.employeeId}"></td>
+                <tr th:each="exam : ${exams}">
+                    <td th:text="${exam.rowid}"></td>
+                    <td th:text="${exam.name}"></td>
                     <td class="text-end">
-                        <a class="btn btn-warning text-white" th:href="@{/exames-funcionarios/{id}(id=${employeeExam.rowid})}">EDITAR</a>
+                        <a class="btn btn-warning text-white" th:href="@{/exames/{id}(id=${exam.rowid})}">EDITAR</a>
                         <a class="btn btn-danger" data-bs-toggle="modal"
-                           th:data-bs-objectid="@{/exames-funcionarios/{id}(id=${employeeExam.rowid})}"
-                           data-bs-target="#confirmarExclusao">DELETAR</a>
+                           th:data-bs-objectid="@{/exames/{id}(id=${exam.rowid})}" data-bs-target="#confirmarExclusao">DELETAR</a>
                     </td>
                 </tr>
                 </tbody>
 
                 <tfoot class="table-secondary">
                 <tr>
-                    <td colspan="5">
-                        <a th:href="@{/exames-funcionarios/form}" class="btn btn-success">NOVO</a>
+                    <td colspan="3">
+                        <a th:href="@{/exames/form}" class="btn btn-success">NOVO</a>
                     </td>
                 </tr>
                 </tfoot>

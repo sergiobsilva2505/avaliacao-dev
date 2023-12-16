@@ -1,6 +1,6 @@
 package br.com.sbs.avaliacaodevspring.relatorio;
 
-import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionarioService;
+import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping("/relatorios")
 public class ReportExamEmployeeController {
 
-    private final ExameFuncionarioService exameFuncionarioService;
+    private final EmployeeExamService employeeExamService;
 
-    public ReportExamEmployeeController(ExameFuncionarioService exameFuncionarioService) {
-        this.exameFuncionarioService = exameFuncionarioService;
+    public ReportExamEmployeeController(EmployeeExamService employeeExamService) {
+        this.employeeExamService = employeeExamService;
     }
 
     @GetMapping
@@ -33,7 +33,7 @@ public class ReportExamEmployeeController {
         if (bindingResult.hasErrors()) {
             return showForm(reportByPeriodForm, model);
         }
-        List<ReportByPeriod> rows = exameFuncionarioService.getReportByPeriod(reportByPeriodForm);
+        List<ReportByPeriod> rows = employeeExamService.getReportByPeriod(reportByPeriodForm);
         model.addAttribute("rows", rows);
 
         return "redirect:/relatorios";
