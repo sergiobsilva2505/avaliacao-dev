@@ -1,6 +1,6 @@
 package br.com.sbs.avaliacaodevspring.api;
 
-import br.com.sbs.avaliacaodevspring.realizado.service.ExameFuncionarioService;
+import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionarioService;
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodForm;
 import org.springframework.http.ResponseEntity;

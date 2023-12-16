@@ -1,7 +1,7 @@
-package br.com.sbs.avaliacaodevspring.realizado.entity;
+package br.com.sbs.avaliacaodevspring.examemployee;
 
 import br.com.sbs.avaliacaodevspring.exam.Exame;
-import br.com.sbs.avaliacaodevspring.funcionario.entity.Funcionario;
+import br.com.sbs.avaliacaodevspring.employee.Funcionario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;

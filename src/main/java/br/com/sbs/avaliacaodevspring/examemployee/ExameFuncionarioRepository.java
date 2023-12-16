@@ -1,6 +1,5 @@
-package br.com.sbs.avaliacaodevspring.realizado.repository;
+package br.com.sbs.avaliacaodevspring.examemployee;
 
-import br.com.sbs.avaliacaodevspring.realizado.entity.ExameFuncionario;
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

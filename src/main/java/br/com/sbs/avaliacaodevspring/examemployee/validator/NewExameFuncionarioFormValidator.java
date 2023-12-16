@@ -1,7 +1,7 @@
-package br.com.sbs.avaliacaodevspring.realizado.validator;
+package br.com.sbs.avaliacaodevspring.examemployee.validator;
 
-import br.com.sbs.avaliacaodevspring.realizado.dto.NewExameFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.realizado.repository.ExameFuncionarioRepository;
+import br.com.sbs.avaliacaodevspring.examemployee.dto.NewExameFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionarioRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

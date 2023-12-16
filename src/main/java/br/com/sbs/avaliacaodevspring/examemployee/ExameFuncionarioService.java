@@ -1,14 +1,12 @@
-package br.com.sbs.avaliacaodevspring.realizado.service;
+package br.com.sbs.avaliacaodevspring.examemployee;
 
 import br.com.sbs.avaliacaodevspring.exam.Exame;
 import br.com.sbs.avaliacaodevspring.exam.ExameService;
-import br.com.sbs.avaliacaodevspring.funcionario.entity.Funcionario;
-import br.com.sbs.avaliacaodevspring.funcionario.service.FuncionarioService;
-import br.com.sbs.avaliacaodevspring.realizado.dto.ExameFuncionarioView;
-import br.com.sbs.avaliacaodevspring.realizado.dto.NewExameFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.realizado.dto.UpdateExameFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.realizado.entity.ExameFuncionario;
-import br.com.sbs.avaliacaodevspring.realizado.repository.ExameFuncionarioRepository;
+import br.com.sbs.avaliacaodevspring.employee.Funcionario;
+import br.com.sbs.avaliacaodevspring.employee.FuncionarioService;
+import br.com.sbs.avaliacaodevspring.examemployee.dto.ExameFuncionarioView;
+import br.com.sbs.avaliacaodevspring.examemployee.dto.NewExameFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.examemployee.dto.UpdateExameFuncionarioForm;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodForm;

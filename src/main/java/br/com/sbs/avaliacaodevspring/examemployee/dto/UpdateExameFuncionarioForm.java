@@ -1,4 +1,4 @@
-package br.com.sbs.avaliacaodevspring.realizado.dto;
+package br.com.sbs.avaliacaodevspring.examemployee.dto;
 
 import jakarta.validation.constraints.NotNull;
 

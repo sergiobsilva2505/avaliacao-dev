@@ -1,6 +1,6 @@
 package br.com.sbs.avaliacaodevspring.relatorio;
 
-import br.com.sbs.avaliacaodevspring.realizado.service.ExameFuncionarioService;
+import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionarioService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

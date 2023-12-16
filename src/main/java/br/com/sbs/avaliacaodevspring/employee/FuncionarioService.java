@@ -1,10 +1,8 @@
-package br.com.sbs.avaliacaodevspring.funcionario.service;
+package br.com.sbs.avaliacaodevspring.employee;
 
-import br.com.sbs.avaliacaodevspring.funcionario.dto.FuncionarioView;
-import br.com.sbs.avaliacaodevspring.funcionario.dto.NewFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.funcionario.dto.UpdateFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.funcionario.entity.Funcionario;
-import br.com.sbs.avaliacaodevspring.funcionario.repository.FuncionarioRepository;
+import br.com.sbs.avaliacaodevspring.employee.dto.FuncionarioView;
+import br.com.sbs.avaliacaodevspring.employee.dto.NewFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.employee.dto.UpdateFuncionarioForm;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

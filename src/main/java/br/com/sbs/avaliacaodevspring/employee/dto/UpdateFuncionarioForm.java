@@ -1,4 +1,4 @@
-package br.com.sbs.avaliacaodevspring.funcionario.dto;
+package br.com.sbs.avaliacaodevspring.employee.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

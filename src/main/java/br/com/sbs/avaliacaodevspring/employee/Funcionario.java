@@ -1,7 +1,7 @@
-package br.com.sbs.avaliacaodevspring.funcionario.entity;
+package br.com.sbs.avaliacaodevspring.employee;
 
-import br.com.sbs.avaliacaodevspring.funcionario.dto.UpdateFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.realizado.entity.ExameFuncionario;
+import br.com.sbs.avaliacaodevspring.employee.dto.UpdateFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 

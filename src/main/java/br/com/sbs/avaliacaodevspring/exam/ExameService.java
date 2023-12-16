@@ -3,7 +3,7 @@ package br.com.sbs.avaliacaodevspring.exam;
 import br.com.sbs.avaliacaodevspring.exam.dto.ExameView;
 import br.com.sbs.avaliacaodevspring.exam.dto.NewExameForm;
 import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExameForm;
-import br.com.sbs.avaliacaodevspring.realizado.repository.ExameFuncionarioRepository;
+import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionarioRepository;
 import br.com.sbs.avaliacaodevspring.exception.BusinessException;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;

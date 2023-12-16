@@ -1,6 +1,6 @@
-package br.com.sbs.avaliacaodevspring.realizado.dto;
+package br.com.sbs.avaliacaodevspring.examemployee.dto;
 
-import br.com.sbs.avaliacaodevspring.realizado.entity.ExameFuncionario;
+import br.com.sbs.avaliacaodevspring.examemployee.ExameFuncionario;
 
 import java.time.LocalDate;
 
