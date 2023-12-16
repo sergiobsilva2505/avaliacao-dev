@@ -4,11 +4,11 @@ import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExam;
 
 import java.time.LocalDate;
 
-public record EmployeeExamView(Long rowid, LocalDate accomplishedIn, Long examId, String examName, Long employeeId, String employeeName) {
+public record EmployeeExamView(Long rowid, LocalDate accomplishedAt, Long examId, String examName, Long employeeId, String employeeName) {
 
    public EmployeeExamView(EmployeeExam employeeExam) {
        this(employeeExam.getRowid(),
-               employeeExam.getAccomplishedIn(),
+               employeeExam.getAccomplishedAt(),
                employeeExam.getExam().getRowid(),
                employeeExam.getExam().getName(),
                employeeExam.getEmployee().getRowid(),

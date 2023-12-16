@@ -18,7 +18,7 @@ public class EmployeeExam {
     @NotNull
     @PastOrPresent
     @Column(name = "accomplished_in")
-    private LocalDate accomplishedIn;
+    private LocalDate accomplishedAt;
     @NotNull
     @JoinColumn(name = "exam_id")
     @ManyToOne
@@ -31,7 +31,7 @@ public class EmployeeExam {
     public EmployeeExam() {}
 
     public EmployeeExam(Employee employee, Exam exam) {
-        this.accomplishedIn = LocalDate.now();
+        this.accomplishedAt = LocalDate.now();
         this.employee = employee;
         this.exam = exam;
     }
@@ -53,8 +53,8 @@ public class EmployeeExam {
         return rowid;
     }
 
-    public LocalDate getAccomplishedIn() {
-        return accomplishedIn;
+    public LocalDate getAccomplishedAt() {
+        return accomplishedAt;
     }
 
     public Exam getExam() {
@@ -69,7 +69,7 @@ public class EmployeeExam {
     public String toString() {
         return new StringJoiner(", ", EmployeeExam.class.getSimpleName() + "[", "]")
                 .add("rowid=" + rowid)
-                .add("accomplishedIn=" + accomplishedIn)
+                .add("accomplishedAt=" + accomplishedAt)
                 .add("exam=" + exam)
                 .add("employee=" + employee)
                 .toString();

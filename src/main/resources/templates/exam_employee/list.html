@@ -24,7 +24,7 @@
                 <tbody>
                 <tr th:each="employeeExam : ${employeeExamViews}">
                     <td th:text="${employeeExam.rowid}"></td>
-                    <td th:text="${#temporals.format(employeeExam.accomplishedIn, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#temporals.format(employeeExam.accomplishedAt, 'dd/MM/yyyy HH:mm')}"></td>
                     <td th:text="${employeeExam.examId}"></td>
                     <td th:text="${employeeExam.employeeId}"></td>
                     <td class="text-end">

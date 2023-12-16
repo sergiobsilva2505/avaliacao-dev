@@ -22,10 +22,10 @@ public class UpdateEmployeeExamFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-//        UpdateEmployeeExamForm form = (UpdateEmployeeExamForm) target;
-//
-//        if (employeeExamRepository.existsByExameAndFuncionarioAndDateAndIdNot(form.exameId(), form.funcionarioId(), form.rowid())) {
-//            errors.reject("exame.funcionario.exists.already");
-//        }
+        UpdateEmployeeExamForm form = (UpdateEmployeeExamForm) target;
+
+        if (employeeExamRepository.existsByEmployeeAndExamAndDateAndRowidNot(form.rowid(), form.employeeId(), form.examId())) {
+            errors.reject("exame.funcionario.exists.already");
+        }
     }
 }

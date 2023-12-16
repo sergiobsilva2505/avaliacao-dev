@@ -1,6 +1,8 @@
 package br.com.sbs.avaliacaodevspring.employee_exam;
 
 import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,17 +12,17 @@ import java.util.List;
 
 public interface EmployeeExamRepository extends JpaRepository<EmployeeExam, Long> {
 
-//    boolean existsByEmployeeRowidAndExamRowidAndAccomplishedIn(Long employeeId, Long examId, LocalDate accomplishedIn);
-//
-//    default boolean existsByExameAndFuncionarioAndDate(Long employeeId, Long examId) {
-//        return existsByEmployeeRowidAndExamRowidAndAccomplishedIn(employeeId, examId, LocalDate.now());
-//    }
-//
-//    boolean existsByEmployeeRowidAndExamRowidAndAccomplishedInAAndRowidNot(Long employeeId, Long examId, LocalDate accomplishedIn, Long rowid);
-//
-//    default boolean existsByExameAndFuncionarioAndDateAndIdNot(Long exameId, Long funcionarioId, Long rowid) {
-//        return existsByExame_RowidAndFuncionario_RowidAndRealizadoEmAndRowidNot(exameId, funcionarioId, LocalDate.now(), rowid);
-//    }
+    boolean existsByEmployeeRowidAndExamRowidAndAccomplishedAt(Long employeeRowid, Long examRowid, @NotNull @PastOrPresent LocalDate accomplishedAt);
+
+    default boolean existsByEmployeeAndExamAndDate(Long employeeRowid, Long examRowid) {
+        return existsByEmployeeRowidAndExamRowidAndAccomplishedAt(employeeRowid, examRowid, LocalDate.now());
+    }
+
+    boolean existsByEmployeeRowidAndExamRowidAndAccomplishedAtAndRowidNot(Long employeeRowid, Long examRowid, @NotNull @PastOrPresent LocalDate accomplishedAt, Long rowid);
+
+    default boolean existsByEmployeeAndExamAndDateAndRowidNot(Long employeeRowid, Long examRowid, Long rowid) {
+        return existsByEmployeeRowidAndExamRowidAndAccomplishedAtAndRowidNot(employeeRowid, examRowid, LocalDate.now(), rowid);
+    }
 
     boolean existsByExam_Rowid(Long examRowid);
 
