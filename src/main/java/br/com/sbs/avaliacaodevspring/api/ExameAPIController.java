@@ -1,10 +1,10 @@
 package br.com.sbs.avaliacaodevspring.api;
 
-import br.com.sbs.avaliacaodevspring.dominio.exame.dto.ExameView;
-import br.com.sbs.avaliacaodevspring.dominio.exame.dto.NewExameForm;
-import br.com.sbs.avaliacaodevspring.dominio.exame.dto.UpdateExameForm;
-import br.com.sbs.avaliacaodevspring.dominio.exame.entity.Exame;
-import br.com.sbs.avaliacaodevspring.dominio.exame.service.ExameService;
+import br.com.sbs.avaliacaodevspring.exam.dto.ExameView;
+import br.com.sbs.avaliacaodevspring.exam.dto.NewExameForm;
+import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExameForm;
+import br.com.sbs.avaliacaodevspring.exam.Exame;
+import br.com.sbs.avaliacaodevspring.exam.ExameService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

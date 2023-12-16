@@ -1,12 +1,12 @@
 package br.com.sbs.avaliacaodevspring.api;
 
-import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.ExameFuncionarioView;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.NewExameFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.dto.UpdateExameFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.entity.ExameFuncionario;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.service.ExameFuncionarioService;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.validator.NewExameFuncionarioFormValidator;
-import br.com.sbs.avaliacaodevspring.dominio.realizado.validator.UpdateExameFuncionarioFormValidator;
+import br.com.sbs.avaliacaodevspring.realizado.dto.ExameFuncionarioView;
+import br.com.sbs.avaliacaodevspring.realizado.dto.NewExameFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.realizado.dto.UpdateExameFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.realizado.entity.ExameFuncionario;
+import br.com.sbs.avaliacaodevspring.realizado.service.ExameFuncionarioService;
+import br.com.sbs.avaliacaodevspring.realizado.validator.NewExameFuncionarioFormValidator;
+import br.com.sbs.avaliacaodevspring.realizado.validator.UpdateExameFuncionarioFormValidator;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;

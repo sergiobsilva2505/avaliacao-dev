@@ -1,10 +1,10 @@
 package br.com.sbs.avaliacaodevspring.api;
 
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.FuncionarioView;
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.NewFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.dto.UpdateFuncionarioForm;
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.entity.Funcionario;
-import br.com.sbs.avaliacaodevspring.dominio.funcionario.service.FuncionarioService;
+import br.com.sbs.avaliacaodevspring.funcionario.dto.FuncionarioView;
+import br.com.sbs.avaliacaodevspring.funcionario.dto.NewFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.funcionario.dto.UpdateFuncionarioForm;
+import br.com.sbs.avaliacaodevspring.funcionario.entity.Funcionario;
+import br.com.sbs.avaliacaodevspring.funcionario.service.FuncionarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
