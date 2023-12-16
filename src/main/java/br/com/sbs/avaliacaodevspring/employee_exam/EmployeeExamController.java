@@ -28,8 +28,8 @@ public class EmployeeExamController {
         this.examService = examService;
     }
 
-    @InitBinder("newExameFuncionarioForm")
-    void initBinderNewExameFuncionarioForm(WebDataBinder webDataBinder) {
+    @InitBinder("newEmployeeExamForm")
+    void initBinderNewEmployeeExamFormForm(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(newEmployeeExamFormValidator);
     }
 
@@ -38,7 +38,7 @@ public class EmployeeExamController {
         model.addAttribute("newEmployeeExamForm", newEmployeeExamForm);
         model.addAttribute("exam", examService.findAll());
 
-        return "realizado/realizadoForm";
+        return "exam_employee/newForm";
     }
 
     @PostMapping
@@ -58,7 +58,7 @@ public class EmployeeExamController {
         Collection<EmployeeExamView> employeeExamViews = employeeExamService.findAll();
         model.addAttribute("employeeExamViews", employeeExamViews);
 
-        return "realizado/list";
+        return "exam_employee/list";
     }
 
     @GetMapping("/{id}")
@@ -66,7 +66,7 @@ public class EmployeeExamController {
         EmployeeExam employeeExam = employeeExamService.findById(id);
         model.addAttribute("employeeExamView", new EmployeeExamView(employeeExam));
 
-        return "realizado/updateForm";
+        return "exam_employee/updateForm";
     }
 
     @PutMapping("/{id}")
