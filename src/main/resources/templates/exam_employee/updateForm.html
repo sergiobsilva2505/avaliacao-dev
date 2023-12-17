@@ -36,7 +36,14 @@
                                    class="form-control" id="rowid" readonly="true"/>
                         </div>
                     </div>
-
+                    <div class="row align-items-center mt-3">
+                        <label for="accomplishedAt" class="col-sm-2 col-form-label text-end">Realizao em:</label>
+                        <div class="col-sm-4">
+<!--                            <input class="form-control" type="datetime-local" th:field="*{accomplishedAt}" th:value="${#temporals.format(employeeExamView.accomplishedAt, 'dd/MM/yyyy HH:mm')}" id="accomplishedAt" name="accomplishedAt"/>-->
+                            <input class="form-control" type="datetime-local" th:field="${employeeExamView.accomplishedAt}" th:value="${employeeExamView.accomplishedAt}" id="accomplishedAt" name="accomplishedAt"/>
+                            <span style="color: red" th:if="${#fields.hasErrors('accomplishedAt')}" th:errors="*{accomplishedAt}"></span>
+                        </div>
+                    </div>
                     <div class="row align-items-center mt-3">
                         <label for="examId" class="col-sm-2 col-form-label text-end">Cód. exam:</label>
                         <div class="col-sm-4">

@@ -1,8 +1,8 @@
 package br.com.sbs.avaliacaodevspring.api;
 
 import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamService;
-import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
-import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodForm;
+import br.com.sbs.avaliacaodevspring.report.ReportByPeriod;
+import br.com.sbs.avaliacaodevspring.report.ReportByPeriodForm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

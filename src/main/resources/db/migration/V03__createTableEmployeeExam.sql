@@ -1,34 +1,9 @@
 CREATE TABLE employee_exam (
-    rowid bigint primary key auto_increment,
-    accomplished_in datetime not null,
-    employee_id bigint not null ,
-    exam_id bigint not null,
-    foreign key (employee_id) references employee(rowid),
-    foreign key (exam_id) references exam(rowid)
+    rowid BIGINT PRIMARY KEY AUTO_INCREMENT,
+    accomplished_at DATETIME NOT NULL,
+    employee_id BIGINT NOT NULL ,
+    exam_id BIGINT NOT NULL,
+    FOREIGN KEY (employee_id) references employee(rowid),
+    FOREIGN KEY (exam_id) references exam(rowid)
 );
 
-INSERT INTO employee_exam (accomplished_in, employee_id, exam_id)
-VALUES ('2023-03-13 17:11:32', 1, 1),
-       ('2023-06-15 05:22:15', 2, 1),
-       ('2023-03-14 01:24:24', 3, 1),
-       ('2023-02-19 18:05:43', 5, 1),
-       ('2023-08-11 22:16:08', 6, 2),
-       ('2023-05-20 05:13:09', 7, 2),
-       ('2023-06-05 15:34:21', 1, 2),
-       ('2023-01-11 14:57:11', 2, 2),
-       ('2023-08-03 23:36:19', 3, 3),
-       ('2023-11-10 03:49:38', 4, 3),
-       ('2023-09-22 13:23:13', 5, 3),
-       ('2023-04-17 01:16:25', 6, 3),
-       ('2023-04-10 22:01:58', 7, 4),
-       ('2023-04-23 23:42:48', 1, 4),
-       ('2023-10-16 10:40:28', 2, 4),
-       ('2023-06-24 12:32:53', 3, 4),
-       ('2023-12-12 12:37:48', 4, 1),
-       ('2023-10-06 18:47:49', 5, 1),
-       ('2023-02-10 13:16:10', 6, 2),
-       ('2023-05-09 14:42:11', 7, 3),
-       ('2023-08-31 09:26:27', 5, 3),
-       ('2023-05-29 12:19:14', 6, 3),
-       ('2023-09-01 09:42:34', 7, 4),
-       ('2023-11-08 01:27:14', 3, 4);

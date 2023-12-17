@@ -1,4 +1,4 @@
-package br.com.sbs.avaliacaodevspring.relatorio;
+package br.com.sbs.avaliacaodevspring.report;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;

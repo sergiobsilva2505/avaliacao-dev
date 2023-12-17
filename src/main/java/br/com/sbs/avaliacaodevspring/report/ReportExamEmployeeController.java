@@ -1,4 +1,4 @@
-package br.com.sbs.avaliacaodevspring.relatorio;
+package br.com.sbs.avaliacaodevspring.report;
 
 import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamService;
 import jakarta.validation.Valid;

@@ -3,8 +3,9 @@ package br.com.sbs.avaliacaodevspring.employee_exam.dto;
 import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExam;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public record EmployeeExamView(Long rowid, LocalDate accomplishedAt, Long examId, String examName, Long employeeId, String employeeName) {
+public record EmployeeExamView(Long rowid, LocalDateTime accomplishedAt, Long examId, String examName, Long employeeId, String employeeName) {
 
    public EmployeeExamView(EmployeeExam employeeExam) {
        this(employeeExam.getRowid(),

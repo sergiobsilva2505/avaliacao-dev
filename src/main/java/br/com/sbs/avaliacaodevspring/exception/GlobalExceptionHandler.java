@@ -35,6 +35,7 @@ public class GlobalExceptionHandler {
     public ModelAndView businessException(BusinessException exception) {
         ModelAndView modelAndView = new ModelAndView("exception/page400");
         modelAndView.addObject("message", exception.getMessage());
+        exception.printStackTrace();
 
         return modelAndView;
     }

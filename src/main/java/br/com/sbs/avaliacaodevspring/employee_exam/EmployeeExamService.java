@@ -8,8 +8,8 @@ import br.com.sbs.avaliacaodevspring.employee_exam.dto.EmployeeExamView;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.NewEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.UpdateEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
-import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriod;
-import br.com.sbs.avaliacaodevspring.relatorio.ReportByPeriodForm;
+import br.com.sbs.avaliacaodevspring.report.ReportByPeriod;
+import br.com.sbs.avaliacaodevspring.report.ReportByPeriodForm;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

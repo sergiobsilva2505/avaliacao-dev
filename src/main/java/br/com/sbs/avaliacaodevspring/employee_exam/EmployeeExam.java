@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
 @Entity
@@ -17,8 +18,7 @@ public class EmployeeExam {
     private Long rowid;
     @NotNull
     @PastOrPresent
-    @Column(name = "accomplished_in")
-    private LocalDate accomplishedAt;
+    private LocalDateTime accomplishedAt;
     @NotNull
     @JoinColumn(name = "exam_id")
     @ManyToOne
@@ -30,8 +30,8 @@ public class EmployeeExam {
 
     public EmployeeExam() {}
 
-    public EmployeeExam(Employee employee, Exam exam) {
-        this.accomplishedAt = LocalDate.now();
+    public EmployeeExam(LocalDateTime accomplishedAt, Employee employee, Exam exam) {
+        this.accomplishedAt = accomplishedAt;
         this.employee = employee;
         this.exam = exam;
     }
@@ -53,7 +53,7 @@ public class EmployeeExam {
         return rowid;
     }
 
-    public LocalDate getAccomplishedAt() {
+    public LocalDateTime getAccomplishedAt() {
         return accomplishedAt;
     }
 

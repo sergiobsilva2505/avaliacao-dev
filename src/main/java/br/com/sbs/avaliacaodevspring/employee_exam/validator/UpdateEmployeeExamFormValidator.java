@@ -1,10 +1,12 @@
 package br.com.sbs.avaliacaodevspring.employee_exam.validator;
 
-import br.com.sbs.avaliacaodevspring.employee_exam.dto.UpdateEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamRepository;
+import br.com.sbs.avaliacaodevspring.employee_exam.dto.UpdateEmployeeExamForm;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import java.time.LocalDateTime;
 
 @Component
 public class UpdateEmployeeExamFormValidator implements Validator {
@@ -24,8 +26,8 @@ public class UpdateEmployeeExamFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         UpdateEmployeeExamForm form = (UpdateEmployeeExamForm) target;
 
-        if (employeeExamRepository.existsByEmployeeAndExamAndDateAndRowidNot(form.rowid(), form.employeeId(), form.examId())) {
-            errors.reject("exame.funcionario.exists.already");
+        if (employeeExamRepository.existsByExamIdAndEmployeeIdAndAccomplishedAt(form.employeeId(), form.examId(), LocalDateTime.parse(form.accomplishedAt()), form.rowid())) {
+            errors.rejectValue("existsAlready", "employee.exam.already.exists");
         }
     }
 }

@@ -44,7 +44,6 @@ public class EmployeeExamController {
     @PostMapping
     public String save(@Valid @ModelAttribute NewEmployeeExamForm newEmployeeExamForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("messageError", "O funcionário já realizou esse exame");
             return showForm(newEmployeeExamForm, model);
         }
 

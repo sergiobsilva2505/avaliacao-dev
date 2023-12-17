@@ -32,9 +32,9 @@ public class ExamService {
     }
 
     public Collection<ExamView> findAll() {
-        Collection<Exam> examesVo = examRepository.findAll();
+        Collection<Exam> exams = examRepository.findAll();
 
-        return examesVo.stream().map(ExamView::new).collect(Collectors.toList());
+        return exams.stream().map(ExamView::new).collect(Collectors.toList());
     }
 
     public Exam findById(Long id) {
@@ -52,7 +52,7 @@ public class ExamService {
     @Transactional
     public void deleteById(Long id) {
         if (employeeExamRepository.existsByExam_Rowid(id)) {
-            throw new BusinessException("Violação da integridade da base dados. Este recurso possui chave estrangeira.");
+            throw new BusinessException("Violação da integridade da base dados.");
         }
         examRepository.deleteById(id);
     }
