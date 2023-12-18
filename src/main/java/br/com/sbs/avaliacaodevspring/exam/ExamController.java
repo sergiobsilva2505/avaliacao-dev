@@ -3,7 +3,6 @@ package br.com.sbs.avaliacaodevspring.exam;
 import br.com.sbs.avaliacaodevspring.exam.dto.ExamView;
 import br.com.sbs.avaliacaodevspring.exam.dto.NewExamForm;
 import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExamForm;
-import br.com.sbs.avaliacaodevspring.filter.OpcoesComboBuscarExames;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +44,9 @@ public class ExamController {
     }
 
     @GetMapping("/{id}")
-    public String showExame(@PathVariable Long id, UpdateExamForm updateExamForm, Model model) {
-        Exam exam = examService.findById(id);
-        model.addAttribute("exameView", new ExamView(exam));
+    public String showExam(@PathVariable Long id, UpdateExamForm updateExamForm, Model model) {
+        ExamView examView = examService.findById(id);
+        model.addAttribute("exameView", examView);
 
         return "exam/updateForm";
     }
@@ -55,7 +54,7 @@ public class ExamController {
     @PutMapping("/{id}")
     public String update(@PathVariable Long id, @Valid UpdateExamForm updateExamForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return showExame(id, updateExamForm, model);
+            return showExam(id, updateExamForm, model);
         }
         examService.update(id, updateExamForm);
 
