@@ -6,7 +6,6 @@ import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExamForm;
 import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamRepository;
 import br.com.sbs.avaliacaodevspring.exception.BusinessException;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
-import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

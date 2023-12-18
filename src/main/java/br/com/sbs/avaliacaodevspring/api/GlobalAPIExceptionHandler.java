@@ -2,7 +2,7 @@ package br.com.sbs.avaliacaodevspring.api;
 
 import br.com.sbs.avaliacaodevspring.exception.BusinessException;
 import br.com.sbs.avaliacaodevspring.exception.FieldMessage;
-import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
+import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -50,8 +50,8 @@ public class GlobalAPIExceptionHandler {
         return ResponseEntity.status(httpStatus).body(problemDetail);
     }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    ResponseEntity<ProblemDetail> controllerNotfound(ResourceNotFoundException exception) {
+    @ExceptionHandler(ObjectNotFoundException.class)
+    ResponseEntity<ProblemDetail> controllerNotfound(ObjectNotFoundException exception) {
 
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)

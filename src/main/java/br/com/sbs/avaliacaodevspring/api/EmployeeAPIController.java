@@ -1,10 +1,9 @@
 package br.com.sbs.avaliacaodevspring.api;
 
-import br.com.sbs.avaliacaodevspring.employee.Employee;
+import br.com.sbs.avaliacaodevspring.employee.EmployeeService;
 import br.com.sbs.avaliacaodevspring.employee.dto.EmployeeView;
 import br.com.sbs.avaliacaodevspring.employee.dto.NewEmployeeForm;
 import br.com.sbs.avaliacaodevspring.employee.dto.UpdateEmployeeForm;
-import br.com.sbs.avaliacaodevspring.employee.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +46,9 @@ public class EmployeeAPIController {
 
     @PutMapping("/{id}")
     ResponseEntity<EmployeeView> update(@PathVariable Long id, @Valid @RequestBody UpdateEmployeeForm updateEmployeeForm) {
-        Employee employee = employeeService.update(id, updateEmployeeForm);
+        EmployeeView employeeView = employeeService.update(id, updateEmployeeForm);
 
-        return ResponseEntity.ok(new EmployeeView(employee));
+        return ResponseEntity.ok(employeeView);
     }
 
     @DeleteMapping("/{id}")

@@ -2,16 +2,12 @@ package br.com.sbs.avaliacaodevspring.employee_exam;
 
 import br.com.sbs.avaliacaodevspring.employee.Employee;
 import br.com.sbs.avaliacaodevspring.employee.EmployeeRepository;
-import br.com.sbs.avaliacaodevspring.employee.dto.EmployeeView;
 import br.com.sbs.avaliacaodevspring.exam.Exam;
 import br.com.sbs.avaliacaodevspring.exam.ExamRepository;
-import br.com.sbs.avaliacaodevspring.exam.ExamService;
-import br.com.sbs.avaliacaodevspring.employee.EmployeeService;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.EmployeeExamView;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.NewEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.UpdateEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
-import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
 import br.com.sbs.avaliacaodevspring.report.ReportByPeriod;
 import br.com.sbs.avaliacaodevspring.report.ReportByPeriodForm;
 import org.springframework.stereotype.Service;
@@ -61,12 +57,9 @@ public class EmployeeExamService {
 
     @Transactional
     public EmployeeExamView update(Long id, UpdateEmployeeExamForm updateEmployeeExamForm) {
-        Exam exam = examRepository.findById(updateEmployeeExamForm.examId())
-                .orElseThrow(()-> new ObjectNotFoundException("Exame não encontrado, id: %s".formatted(updateEmployeeExamForm.examId())));
-        Employee employee = employeeRepository.findById(updateEmployeeExamForm.employeeId())
-                .orElseThrow(()-> new ObjectNotFoundException("Funcionario não encontrado, id: %s".formatted(updateEmployeeExamForm.examId())));
-        EmployeeExam employeeExam = employeeExamRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Exame de funcionario não encontrado, id: %s".formatted(id)));
+        Exam exam = examRepository.findById(updateEmployeeExamForm.examId()).orElseThrow(()-> new ObjectNotFoundException("Exame não encontrado, id: %s".formatted(updateEmployeeExamForm.examId())));
+        Employee employee = employeeRepository.findById(updateEmployeeExamForm.employeeId()).orElseThrow(()-> new ObjectNotFoundException("Funcionario não encontrado, id: %s".formatted(updateEmployeeExamForm.examId())));
+        EmployeeExam employeeExam = employeeExamRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Exame de funcionario não encontrado, id: %s".formatted(id)));
 
         employeeExam.merge(employee, exam);
 

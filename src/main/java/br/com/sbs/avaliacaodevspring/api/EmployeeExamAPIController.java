@@ -57,9 +57,9 @@ public class EmployeeExamAPIController {
 
     @GetMapping("/{id}")
     ResponseEntity<EmployeeExamView> findById(@PathVariable Long id) {
-        EmployeeExam employeeExam = employeeExamService.findById(id);
+        EmployeeExamView employeeExamView = employeeExamService.findById(id);
 
-        return ResponseEntity.ok().body(new EmployeeExamView(employeeExam));
+        return ResponseEntity.ok().body(employeeExamView);
     }
 
     @PutMapping("/{id}")

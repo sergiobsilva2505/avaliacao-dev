@@ -3,7 +3,7 @@ package br.com.sbs.avaliacaodevspring.employee;
 import br.com.sbs.avaliacaodevspring.employee.dto.EmployeeView;
 import br.com.sbs.avaliacaodevspring.employee.dto.NewEmployeeForm;
 import br.com.sbs.avaliacaodevspring.employee.dto.UpdateEmployeeForm;
-import br.com.sbs.avaliacaodevspring.exception.ResourceNotFoundException;
+import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,14 +33,14 @@ public class EmployeeService {
     }
 
     public EmployeeView findById(Long id) {
-        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
 
         return new EmployeeView(employee);
     }
 
     @Transactional
     public EmployeeView update(Long id, UpdateEmployeeForm updateEmployeeForm) {
-        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
         employee.merge(updateEmployeeForm);
 
         return new EmployeeView(employee);

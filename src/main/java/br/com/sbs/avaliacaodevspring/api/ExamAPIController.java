@@ -40,9 +40,9 @@ public class ExamAPIController {
 
     @GetMapping("/{id}")
     ResponseEntity<ExamView> findById(@PathVariable Long id) {
-        Exam exam = examService.findById(id);
+        ExamView examView = examService.findById(id);
 
-        return ResponseEntity.ok().body(new ExamView(exam));
+        return ResponseEntity.ok().body(examView);
     }
 
     @PutMapping("/{id}")
