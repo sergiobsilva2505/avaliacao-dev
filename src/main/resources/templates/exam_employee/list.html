@@ -12,50 +12,49 @@
         <div class="row">
             <table class="table table-light table-striped align-middle">
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>REALIZADO EM</th>
-                    <th>EXAME</th>
-                    <th>FUNCIONARIO</th>
-                    <th class="text-end mt-5">AÇÃO</th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>REALIZADO EM</th>
+                        <th>EXAME</th>
+                        <th>FUNCIONARIO</th>
+                        <th class="text-end mt-5">AÇÃO</th>
+                    </tr>
                 </thead>
-
                 <tbody>
-                <tr th:each="employeeExam : ${employeeExamViews}">
-                    <td th:text="${employeeExam.rowid}"></td>
-                    <td th:text="${#temporals.format(employeeExam.accomplishedAt, 'dd/MM/yyyy HH:mm')}"></td>
-                    <td th:text="${employeeExam.examId}"></td>
-                    <td th:text="${employeeExam.employeeId}"></td>
-                    <td class="text-end">
-                        <a class="btn btn-warning text-white" th:href="@{/exames-funcionarios/{id}(id=${employeeExam.rowid})}">EDITAR</a>
-                        <a class="btn btn-danger" data-bs-toggle="modal"
-                           th:data-bs-objectid="@{/exames-funcionarios/{id}(id=${employeeExam.rowid})}"
-                           data-bs-target="#confirmarExclusao">DELETAR</a>
-                    </td>
-                </tr>
+                    <tr th:each="employeeExam : ${employeeExamViews}">
+                        <td th:text="${employeeExam.rowid}"></td>
+                        <td th:text="${#temporals.format(employeeExam.accomplishedAt, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td th:text="${employeeExam.examId}"></td>
+                        <td th:text="${employeeExam.employeeId}"></td>
+                        <td class="text-end">
+                            <a class="btn btn-warning text-white" th:href="@{/exames-funcionarios/{id}(id=${employeeExam.rowid})}">EDITAR</a>
+                            <a class="btn btn-danger" data-bs-toggle="modal"
+                               th:data-bs-objectid="@{/exames-funcionarios/{id}(id=${employeeExam.rowid})}"
+                               data-bs-target="#confirmarExclusao">DELETAR</a>
+                        </td>
+                    </tr>
                 </tbody>
 
                 <tfoot class="table-secondary">
-                <tr>
-                    <td colspan="4">
-                        <a th:href="@{/exames-funcionarios/form}" class="btn btn-success">NOVO</a>
-                    </td>
-                    <td colspan="1">
-                        <nav aria-label="Pagination">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item" th:if="${employeeExamViews.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-                                    <a th:class="page-link"
-                                       th:href="@{/exames-funcionarios(currentPage=${pageNumber}, pageSize=${employeeExamViews.size})}"
-                                       th:classappend="${pageNumber == employeeExamViews.number + 1} ? active"
-                                       th:text="${pageNumber}">
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="4">
+                            <a th:href="@{/exames-funcionarios/form}" class="btn btn-success">NOVO</a>
+                        </td>
+                        <td colspan="1">
+                            <nav aria-label="Pagination">
+                                <span>Paginas = </span>
+                                <ul class="pagination mb-0 justify-content-end">
+                                    <li class="page-item" th:if="${employeeExamViews.totalPages > 1}" th:each="pageNumber : ${pageNumbers}">
+                                        <a th:class="page-link"
+                                           th:href="@{/exames-funcionarios(page=${pageNumber}, pageSize=${employeeExamViews.size})}"
+                                           th:classappend="${pageNumber == employeeExamViews.number + 1} ? active"
+                                           th:text="${pageNumber}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>

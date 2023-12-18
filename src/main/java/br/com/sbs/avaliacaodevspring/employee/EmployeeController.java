@@ -4,12 +4,16 @@ import br.com.sbs.avaliacaodevspring.employee.dto.EmployeeView;
 import br.com.sbs.avaliacaodevspring.employee.dto.NewEmployeeForm;
 import br.com.sbs.avaliacaodevspring.employee.dto.UpdateEmployeeForm;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/funcionarios")
@@ -22,9 +26,17 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public String findAll(Model model) {
-        Collection<EmployeeView> employees = employeeService.findAll();
+    public String findAll(@RequestParam(value = "page", defaultValue = "1") Integer currentPage,
+                          @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Model model) {
+        PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
+        Page<EmployeeView> employees = employeeService.findAll(pageRequest);
         model.addAttribute("employees", employees);
+
+        int totalPages = employees.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
 
         return "employee/list";
     }

@@ -1,16 +1,15 @@
 package br.com.sbs.avaliacaodevspring.exam;
 
+import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamRepository;
 import br.com.sbs.avaliacaodevspring.exam.dto.ExamView;
 import br.com.sbs.avaliacaodevspring.exam.dto.NewExamForm;
 import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExamForm;
-import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamRepository;
 import br.com.sbs.avaliacaodevspring.exception.BusinessException;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Service
 public class ExamService {
@@ -30,10 +29,10 @@ public class ExamService {
         return new ExamView(examRepository.save(exam));
     }
 
-    public Collection<ExamView> findAll() {
-        Collection<Exam> exams = examRepository.findAll();
+    public Page<ExamView> findAll(PageRequest pageRequest) {
+        Page<Exam> pagedExams = examRepository.findAll(pageRequest);
 
-        return exams.stream().map(ExamView::new).collect(Collectors.toList());
+        return pagedExams.map(ExamView::new);
     }
 
     public ExamView findById(Long id) {

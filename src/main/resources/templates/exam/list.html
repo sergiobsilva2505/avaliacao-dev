@@ -34,8 +34,22 @@
 
                 <tfoot class="table-secondary">
                 <tr>
-                    <td colspan="3">
+                    <td colspan="2">
                         <a th:href="@{/exames/form}" class="btn btn-success">NOVO</a>
+                    </td>
+                    <td colspan="1">
+                        <nav aria-label="Pagination">
+                            <ul class="pagination mb-0 justify-content-end">
+                                <li class="page-item" th:if="${exams.totalPages > 1}" th:each="pageNumber : ${pageNumbers}">
+                                    <a th:class="page-link"
+                                       th:href="@{/exames(page=${pageNumber}, pageSize=${exams.size})}"
+                                       th:classappend="${pageNumber == exams.number + 1} ? active"
+                                       th:text="${pageNumber}">
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
                     </td>
                 </tr>
                 </tfoot>

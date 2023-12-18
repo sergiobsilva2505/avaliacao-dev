@@ -41,7 +41,7 @@ public class EmployeeExamController {
     @GetMapping("/form")
     public String showForm(NewEmployeeExamForm newEmployeeExamForm, Model model) {
         model.addAttribute("newEmployeeExamForm", newEmployeeExamForm);
-        model.addAttribute("exam", examService.findAll());
+        model.addAttribute("exam", "exames"); // TODO LEMBRAR DE RETIRAR DEPOIS
 
         return "exam_employee/newForm";
     }
@@ -58,7 +58,7 @@ public class EmployeeExamController {
     }
 
     @GetMapping
-    public String findAll(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+    public String findAll(@RequestParam(value = "page", defaultValue = "1") Integer currentPage,
                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Model model) {
         PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
         Page<EmployeeExamView> employeeExamViews = employeeExamService.findAll(pageRequest);

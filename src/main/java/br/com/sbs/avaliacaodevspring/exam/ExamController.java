@@ -4,10 +4,15 @@ import br.com.sbs.avaliacaodevspring.exam.dto.ExamView;
 import br.com.sbs.avaliacaodevspring.exam.dto.NewExamForm;
 import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExamForm;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/exames")
@@ -37,8 +42,17 @@ public class ExamController {
     }
 
     @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("exams", examService.findAll());
+    public String findAll(@RequestParam(value = "page", defaultValue = "1") Integer currentPage,
+                          @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Model model) {
+        PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
+        Page<ExamView> exams = examService.findAll(pageRequest);
+        model.addAttribute("exams", exams);
+
+        int totalPages = exams.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
 
         return "exam/list";
     }

@@ -51,8 +51,8 @@ public class EmployeeExamAPIController {
     }
 
     @GetMapping
-    ResponseEntity<Page<EmployeeExamView>> findAll(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
-                                                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+    ResponseEntity<Page<EmployeeExamView>> findAll(@RequestParam(value = "page", defaultValue = "1") Integer currentPage,
+                                                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
         Page<EmployeeExamView> employeesExams = employeeExamService.findAll(pageRequest);
 

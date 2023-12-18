@@ -4,10 +4,10 @@ import br.com.sbs.avaliacaodevspring.employee.dto.EmployeeView;
 import br.com.sbs.avaliacaodevspring.employee.dto.NewEmployeeForm;
 import br.com.sbs.avaliacaodevspring.employee.dto.UpdateEmployeeForm;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collection;
 
 @Service
 public class EmployeeService {
@@ -18,10 +18,10 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Collection<EmployeeView> findAll() {
-        Collection<Employee> employees = employeeRepository.findAll();
+    public Page<EmployeeView> findAll(PageRequest pageRequest) {
+        Page<Employee> pagedEmployees = employeeRepository.findAll(pageRequest);
 
-        return employees.stream().map(EmployeeView::new).toList();
+        return pagedEmployees.map(EmployeeView::new);
     }
 
     @Transactional

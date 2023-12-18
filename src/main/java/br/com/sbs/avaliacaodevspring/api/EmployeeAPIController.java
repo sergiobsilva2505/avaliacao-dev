@@ -5,7 +5,10 @@ import br.com.sbs.avaliacaodevspring.employee.dto.EmployeeView;
 import br.com.sbs.avaliacaodevspring.employee.dto.NewEmployeeForm;
 import br.com.sbs.avaliacaodevspring.employee.dto.UpdateEmployeeForm;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,8 +34,10 @@ public class EmployeeAPIController {
     }
 
     @GetMapping
-    ResponseEntity<Collection<EmployeeView>> findAll() {
-        Collection<EmployeeView> employees = employeeService.findAll();
+    ResponseEntity<Page<EmployeeView>> findAll(@RequestParam(value = "page", defaultValue = "1") Integer currentPage,
+                                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Model model) {
+        PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
+        Page<EmployeeView> employees = employeeService.findAll(pageRequest);
 
         return ResponseEntity.ok(employees);
     }
