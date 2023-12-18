@@ -37,13 +37,15 @@ public class ExamService {
         return exams.stream().map(ExamView::new).collect(Collectors.toList());
     }
 
-    public Exam findById(Long id) {
-        return examRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
+    public ExamView findById(Long id) {
+        Exam exam = examRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
+
+        return new ExamView(exam);
     }
 
     @Transactional
     public ExamView update(Long id, UpdateExamForm updateExamForm) {
-        Exam exam = examRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Exame não encontrado id: %s".formatted(id)));
+        Exam exam = examRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Exame não encontrado id: %s".formatted(id)));
         exam.merge(updateExamForm);
 
         return new ExamView(exam);

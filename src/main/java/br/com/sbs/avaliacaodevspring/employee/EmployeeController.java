@@ -48,8 +48,8 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public String showEmployee(@PathVariable Long id, UpdateEmployeeForm updateEmployeeForm, Model model) {
-        Employee employee = employeeService.findById(id);
-        model.addAttribute("employeeView", new EmployeeView(employee));
+        EmployeeView employeeView = employeeService.findById(id);
+        model.addAttribute("employeeView", employeeView);
 
         return "employee/updateForm";
     }
@@ -60,14 +60,14 @@ public class EmployeeController {
             return showEmployee(id, updateEmployeeForm, model);
         }
 
-        Employee employee = employeeService.update(id, updateEmployeeForm);
-        model.addAttribute("funcionarioView", new EmployeeView(employee));
+        EmployeeView employee = employeeService.update(id, updateEmployeeForm);
+        model.addAttribute("funcionarioView", employee);
 
         return "redirect:/funcionarios";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id, boolean isRequestedByApi) {
+    public String delete(@PathVariable Long id) {
         employeeService.deleteById(id);
 
         return "redirect:/funcionarios";

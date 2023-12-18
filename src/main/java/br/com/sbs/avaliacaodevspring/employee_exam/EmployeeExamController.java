@@ -1,10 +1,10 @@
 package br.com.sbs.avaliacaodevspring.employee_exam;
 
-import br.com.sbs.avaliacaodevspring.exam.ExamService;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.EmployeeExamView;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.NewEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.employee_exam.dto.UpdateEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.employee_exam.validator.NewEmployeeExamFormValidator;
+import br.com.sbs.avaliacaodevspring.exam.ExamService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,9 +61,9 @@ public class EmployeeExamController {
     }
 
     @GetMapping("/{id}")
-    public String showExameRealizado(@PathVariable Long id, UpdateEmployeeExamForm updateEmployeeExamForm, Model model) {
-        EmployeeExam employeeExam = employeeExamService.findById(id);
-        model.addAttribute("employeeExamView", new EmployeeExamView(employeeExam));
+    public String showExamEmployee(@PathVariable Long id, UpdateEmployeeExamForm updateEmployeeExamForm, Model model) {
+        EmployeeExamView employeeExamView = employeeExamService.findById(id);
+        model.addAttribute("employeeExamView", employeeExamView);
 
         return "exam_employee/updateForm";
     }
@@ -71,7 +71,7 @@ public class EmployeeExamController {
     @PutMapping("/{id}")
     public String update(@PathVariable Long id, @Valid @ModelAttribute UpdateEmployeeExamForm updateEmployeeExamForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return showExameRealizado(id, updateEmployeeExamForm, model);
+            return showExamEmployee(id, updateEmployeeExamForm, model);
         }
         employeeExamService.update(id, updateEmployeeExamForm);
 

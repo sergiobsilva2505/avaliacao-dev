@@ -13,17 +13,21 @@ public interface EmployeeExamRepository extends JpaRepository<EmployeeExam, Long
 
     boolean existsByExam_Rowid(Long examRowid);
 
-    @Query("SELECT COUNT(ee) > 0 FROM EmployeeExam ee " +
-            "WHERE ee.exam.rowid = :examId " +
-            "AND ee.employee.rowid = :employeeId " +
-            "AND FORMATDATETIME(ee.accomplishedAt, 'yyyy-MM-dd') = FORMATDATETIME(:accomplishedAt, 'yyyy-MM-dd')")
+    @Query("""
+            SELECT COUNT(ee) > 0 FROM EmployeeExam ee
+            WHERE ee.exam.rowid = :examId
+            AND ee.employee.rowid = :employeeId
+            AND FORMATDATETIME(ee.accomplishedAt, 'yyyy-MM-dd') = FORMATDATETIME(:accomplishedAt, 'yyyy-MM-dd')
+            """)
     boolean existsByExamIdAndEmployeeIdAndAccomplishedAt(@Param("examId") Long examId, @Param("employeeId") Long employeeId, @Param("accomplishedAt") LocalDateTime accomplishedAt);
 
-    @Query("SELECT COUNT(ee) > 0 FROM EmployeeExam ee " +
-            "WHERE ee.exam.rowid = :examId " +
-            "AND ee.employee.rowid = :employeeId " +
-            "AND FORMATDATETIME(ee.accomplishedAt, 'yyyy-MM-dd') = FORMATDATETIME(:accomplishedAt, 'yyyy-MM-dd') " +
-            "AND ee.rowid <> :excludeRowId")
+    @Query("""
+            SELECT COUNT(ee) > 0 FROM EmployeeExam ee
+            WHERE ee.exam.rowid = :examId
+            AND ee.employee.rowid = :employeeId
+            AND FORMATDATETIME(ee.accomplishedAt, 'yyyy-MM-dd') = FORMATDATETIME(:accomplishedAt, 'yyyy-MM-dd')
+            AND ee.rowid <> :excludeRowId
+            """)
     boolean existsByExamIdAndEmployeeIdAndAccomplishedAt(@Param("examId") Long examId, @Param("employeeId") Long employeeId, @Param("accomplishedAt") LocalDateTime accomplishedAt, @Param("excludeRowId") Long excludeRowId);
 
     @Query(value = """

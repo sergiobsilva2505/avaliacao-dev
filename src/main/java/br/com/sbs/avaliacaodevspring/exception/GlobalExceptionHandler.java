@@ -1,22 +1,15 @@
 package br.com.sbs.avaliacaodevspring.exception;
 
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ModelAndView notFoundException(ResourceNotFoundException exception) {
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ModelAndView notFoundException(ObjectNotFoundException exception) {
         ModelAndView modelAndView = new ModelAndView("exception/page404");
         modelAndView.addObject("message", exception.getMessage());
 

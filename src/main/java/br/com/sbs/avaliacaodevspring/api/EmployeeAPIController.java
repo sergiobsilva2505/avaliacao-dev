@@ -40,9 +40,9 @@ public class EmployeeAPIController {
 
     @GetMapping("/{id}")
     ResponseEntity<EmployeeView> findById(@PathVariable Long id) {
-        Employee employee = employeeService.findById(id);
+        EmployeeView employee = employeeService.findById(id);
 
-        return ResponseEntity.ok().body(new EmployeeView(employee));
+        return ResponseEntity.ok().body(employee);
     }
 
     @PutMapping("/{id}")

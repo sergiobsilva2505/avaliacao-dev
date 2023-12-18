@@ -32,16 +32,18 @@ public class EmployeeService {
         return new EmployeeView(employee);
     }
 
-    public Employee findById(Long id) {
-        return employeeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
+    public EmployeeView findById(Long id) {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
+
+        return new EmployeeView(employee);
     }
 
     @Transactional
-    public Employee update(Long id, UpdateEmployeeForm updateEmployeeForm) {
-        Employee employee = employeeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
+    public EmployeeView update(Long id, UpdateEmployeeForm updateEmployeeForm) {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado, id: %s".formatted(id)));
         employee.merge(updateEmployeeForm);
 
-        return employee;
+        return new EmployeeView(employee);
     }
 
     @Transactional

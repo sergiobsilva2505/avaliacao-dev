@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br"
-      xmlns:th="http://thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{template.html}">
 <head>
@@ -70,11 +70,11 @@
 
                 <tbody>
                     <tr th:each="row : ${rows}">
-                        <td th:text="#{row.getrowidemployee}"></td>
-                        <td th:text="#{row.getNomeEmployee()}"></td>
-                        <td th:text="#{row.getRowIdExam()}"></td>
-                        <td th:text="#{row.getNomeExam()}"></td>
-                        <td th:text="#{#temporals.format(row.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
+                        <td th:text="${row.getRowIdEmployee()}"></td>
+                        <td th:text="${row.getNomeEmployee()}"></td>
+                        <td th:text="${row.getRowIdExam()}"></td>
+                        <td th:text="${row.getNomeExam()}"></td>
+                        <td th:text="${#temporals.format(row.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
                     </tr>
                 </tbody>
 
