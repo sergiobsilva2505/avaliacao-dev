@@ -10,6 +10,8 @@ import br.com.sbs.avaliacaodevspring.employee_exam.dto.UpdateEmployeeExamForm;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
 import br.com.sbs.avaliacaodevspring.report.ReportByPeriod;
 import br.com.sbs.avaliacaodevspring.report.ReportByPeriodForm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,10 +44,10 @@ public class EmployeeExamService {
         return employeeExam;
     }
 
-    public Collection<EmployeeExamView> findAll() {
-        Collection<EmployeeExam> employeeExamList = employeeExamRepository.findAll();
+    public Page<EmployeeExamView> findAll(PageRequest pageRequest) {
+        Page<EmployeeExam> employeeExam = employeeExamRepository.findAll(pageRequest);
 
-        return employeeExamList.stream().map(EmployeeExamView::new).toList();
+        return employeeExam.map(EmployeeExamView::new);
     }
 
     public EmployeeExamView findById(Long id) {

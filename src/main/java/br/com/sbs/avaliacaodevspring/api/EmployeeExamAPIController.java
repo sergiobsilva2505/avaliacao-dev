@@ -8,6 +8,8 @@ import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExamService;
 import br.com.sbs.avaliacaodevspring.employee_exam.validator.NewEmployeeExamFormValidator;
 import br.com.sbs.avaliacaodevspring.employee_exam.validator.UpdateEmployeeExamFormValidator;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +51,10 @@ public class EmployeeExamAPIController {
     }
 
     @GetMapping
-    ResponseEntity<Collection<EmployeeExamView>> findAll() {
-        Collection<EmployeeExamView> employeesExams = employeeExamService.findAll();
+    ResponseEntity<Page<EmployeeExamView>> findAll(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+                                                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
+        Page<EmployeeExamView> employeesExams = employeeExamService.findAll(pageRequest);
 
         return ResponseEntity.ok().body(employeesExams);
     }

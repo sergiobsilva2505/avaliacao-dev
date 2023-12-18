@@ -5,5 +5,4 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
 
     var btnExcluir = document.getElementById('excluir');
     btnExcluir.action = recipient;
-    console.log(recipient)
 });
