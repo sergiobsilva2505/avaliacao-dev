@@ -3,6 +3,7 @@ package br.com.sbs.avaliacaodevspring.exam;
 import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExamForm;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Exam {
@@ -11,7 +12,7 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rowid;
     @NotBlank
-    @Column(length = 30)
+    @Size(min = 3, max = 30)
     private String name;
 
     public Exam() {

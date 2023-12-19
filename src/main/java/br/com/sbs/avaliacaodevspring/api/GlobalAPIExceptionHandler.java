@@ -3,6 +3,7 @@ package br.com.sbs.avaliacaodevspring.api;
 import br.com.sbs.avaliacaodevspring.exception.BusinessException;
 import br.com.sbs.avaliacaodevspring.exception.FieldMessage;
 import br.com.sbs.avaliacaodevspring.exception.ObjectNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -79,6 +80,15 @@ public class GlobalAPIExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
+                .body(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage()));
+    }
+
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    ResponseEntity<ProblemDetail> controllerNotfound(ConstraintViolationException exception) {
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
                 .body(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage()));
     }
 }
