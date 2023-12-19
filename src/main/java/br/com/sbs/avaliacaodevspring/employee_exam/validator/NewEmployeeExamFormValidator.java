@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.time.LocalDateTime;
-
 @Component
 public class NewEmployeeExamFormValidator implements Validator {
 
@@ -26,7 +24,7 @@ public class NewEmployeeExamFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         NewEmployeeExamForm form = (NewEmployeeExamForm) target;
 
-        if (employeeExamRepository.existsByExamIdAndEmployeeIdAndAccomplishedAt(form.employeeId(), form.examId(), LocalDateTime.parse(form.accomplishedAt()))) {
+        if (employeeExamRepository.existsByEmployee_RowidAndExam_RowidAndAccomplishedAt(form.employeeId(), form.examId(), form.accomplishedAt())) {
             errors.rejectValue("accomplishedAt", "", "O funcionário já realizou este exame hoje");
         }
     }

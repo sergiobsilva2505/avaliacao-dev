@@ -8,6 +8,24 @@
 </head>
 <body class="bg-secondary">
 <div layout:fragment="conteudo">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/exames}">Avaliação</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/exames}">Exames</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/funcionarios}">Funcionarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/exames-funcionarios}">Exames realizados</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <form th:action="@{/exames-funcionarios/{id}(id=${employeeExamView.rowid})}" th:object="${updateEmployeeExamForm}" method="post">
             <input type="hidden" name="_method" value="put">
@@ -40,7 +58,7 @@
                         <label for="accomplishedAt" class="col-sm-2 col-form-label text-end">Realizao em:</label>
                         <div class="col-sm-4">
 <!--                            <input class="form-control" type="datetime-local" th:field="*{accomplishedAt}" th:value="${#temporals.format(employeeExamView.accomplishedAt, 'dd/MM/yyyy HH:mm')}" id="accomplishedAt" name="accomplishedAt"/>-->
-                            <input class="form-control" type="datetime-local" th:field="${employeeExamView.accomplishedAt}" th:value="${employeeExamView.accomplishedAt}" id="accomplishedAt" name="accomplishedAt"/>
+                            <input class="form-control" type="LocalDate" th:field="${employeeExamView.accomplishedAt}" th:value="${employeeExamView.accomplishedAt}" id="accomplishedAt" name="accomplishedAt"/>
                             <span style="color: red" th:if="${#fields.hasErrors('accomplishedAt')}" th:errors="*{accomplishedAt}"></span>
                         </div>
                     </div>

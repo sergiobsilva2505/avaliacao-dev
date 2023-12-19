@@ -8,6 +8,6 @@ public interface ReportByPeriod {
     String getNomeEmployee();
     Long getRowIdExam();
     String getNomeExam();
-    LocalDate getCreatedAt();
+    LocalDate getAccomplishedAt();
 
 }

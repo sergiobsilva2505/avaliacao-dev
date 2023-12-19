@@ -6,29 +6,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EmployeeExamRepository extends JpaRepository<EmployeeExam, Long> {
 
     boolean existsByExam_Rowid(Long examRowid);
 
-    @Query("""
-            SELECT COUNT(ee) > 0 FROM EmployeeExam ee
-            WHERE ee.exam.rowid = :examId
-            AND ee.employee.rowid = :employeeId
-            AND FORMATDATETIME(ee.accomplishedAt, 'yyyy-MM-dd') = FORMATDATETIME(:accomplishedAt, 'yyyy-MM-dd')
-            """)
-    boolean existsByExamIdAndEmployeeIdAndAccomplishedAt(@Param("examId") Long examId, @Param("employeeId") Long employeeId, @Param("accomplishedAt") LocalDateTime accomplishedAt);
+    boolean existsByEmployee_RowidAndExam_RowidAndAccomplishedAt(Long employeeRowId, Long examRowId, LocalDate accomplishedAt);
 
-    @Query("""
-            SELECT COUNT(ee) > 0 FROM EmployeeExam ee
-            WHERE ee.exam.rowid = :examId
-            AND ee.employee.rowid = :employeeId
-            AND FORMATDATETIME(ee.accomplishedAt, 'yyyy-MM-dd') = FORMATDATETIME(:accomplishedAt, 'yyyy-MM-dd')
-            AND ee.rowid <> :excludeRowId
-            """)
-    boolean existsByExamIdAndEmployeeIdAndAccomplishedAt(@Param("examId") Long examId, @Param("employeeId") Long employeeId, @Param("accomplishedAt") LocalDateTime accomplishedAt, @Param("excludeRowId") Long excludeRowId);
+    boolean existsByEmployee_RowidAndExam_RowidAndAccomplishedAtAndRowidNot(Long employeeRowId, Long examRowId, LocalDate accomplishedAt, Long rowid);
+
 
     @Query(value = """
             SELECT fc.rowid AS rowIdEmployee, fc.name AS nomeEmployee, ex.rowid AS rowIdExam, ex.name AS nomeExam, ef.accomplished_at AS accomplishedAt FROM EMPLOYEE_EXAM ef

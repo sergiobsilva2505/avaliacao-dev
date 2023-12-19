@@ -1,8 +1,9 @@
-var exampleModal = document.getElementById('confirmarExclusao')
-exampleModal.addEventListener('show.bs.modal', function (event) {
-    var button = event.relatedTarget
-    var recipient = button.getAttribute('data-bs-objectid')
+const modal = document.getElementById('confirmarExclusao')
 
-    var btnExcluir = document.getElementById('excluir');
-    btnExcluir.action = recipient;
+modal.addEventListener('show.bs.modal', function (event) {
+    const button = event.relatedTarget
+    const recipient = button.getAttribute('data-bs-objectid')
+
+    const bntDelete = document.getElementById('excluir');
+    bntDelete.action = recipient;
 });

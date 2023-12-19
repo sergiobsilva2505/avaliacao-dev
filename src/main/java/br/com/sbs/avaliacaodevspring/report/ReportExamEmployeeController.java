@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.Thymeleaf;
 
 import java.util.List;
 
@@ -29,12 +31,13 @@ public class ReportExamEmployeeController {
     }
 
     @PostMapping
-    public String sendRequest(@Valid ReportByPeriodForm reportByPeriodForm, BindingResult bindingResult, Model model) {
+    public String sendRequest(@Valid ReportByPeriodForm reportByPeriodForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,  Model model) {
         if (bindingResult.hasErrors()) {
             return showForm(reportByPeriodForm, model);
         }
         List<ReportByPeriod> rows = employeeExamService.getReportByPeriod(reportByPeriodForm);
-        model.addAttribute("rows", rows);
+//        List<ReportByPeriodDTO> rows = list.stream().map(ReportByPeriodDTO::new).toList();
+        redirectAttributes.addAttribute("rows", rows);
 
         return "redirect:/relatorios";
     }

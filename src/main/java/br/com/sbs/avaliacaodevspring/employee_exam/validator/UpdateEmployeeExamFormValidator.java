@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.time.LocalDateTime;
-
 @Component
 public class UpdateEmployeeExamFormValidator implements Validator {
 
@@ -26,7 +24,7 @@ public class UpdateEmployeeExamFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         UpdateEmployeeExamForm form = (UpdateEmployeeExamForm) target;
 
-        if (employeeExamRepository.existsByExamIdAndEmployeeIdAndAccomplishedAt(form.employeeId(), form.examId(), LocalDateTime.parse(form.accomplishedAt()), form.rowid())) {
+        if (employeeExamRepository.existsByEmployee_RowidAndExam_RowidAndAccomplishedAtAndRowidNot(form.employeeId(), form.examId(), form.accomplishedAt(), form.rowid())) {
             errors.rejectValue("existsAlready", "employee.exam.already.exists");
         }
     }
