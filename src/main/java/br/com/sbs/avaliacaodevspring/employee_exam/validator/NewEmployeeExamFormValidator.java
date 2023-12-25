@@ -25,7 +25,7 @@ public class NewEmployeeExamFormValidator implements Validator {
         NewEmployeeExamForm form = (NewEmployeeExamForm) target;
 
         if (employeeExamRepository.existsByEmployee_RowidAndExam_RowidAndAccomplishedAt(form.employeeId(), form.examId(), form.accomplishedAt())) {
-            errors.rejectValue("accomplishedAt", "", "O funcionário já realizou este exame hoje");
+            errors.rejectValue("accomplishedAt", "employee.exam.already.exists");
         }
     }
 }

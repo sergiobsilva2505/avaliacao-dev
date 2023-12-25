@@ -69,11 +69,11 @@
                 </thead>
 
                 <tbody>
-                    <tr th:each="row : ${rows}">
-                        <td th:text="${row.rowIdEmployee()}"></td>
-                        <td th:text="${row.nomeEmployee()}"></td>
-                        <td th:text="${row.rowIdExam()}"></td>
-                        <td th:text="${row.nomeExam()}"></td>
+                    <tr th:each="rowsReport : ${rowsReport}">
+                        <td th:text="${rowsReport.rowIdEmployee()}"></td>
+                        <td th:text="${rowsReport.nomeEmployee()}"></td>
+                        <td th:text="${rowsReport.rowIdExam()}"></td>
+                        <td th:text="${rowsReport.nomeExam()}"></td>
                         <td th:text="${#temporals.format(row.createdAt(), 'dd/MM/yyyy HH:mm')}"></td>
                     </tr>
                 </tbody>

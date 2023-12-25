@@ -83,7 +83,6 @@ public class GlobalAPIExceptionHandler {
                 .body(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage()));
     }
 
-
     @ExceptionHandler(ConstraintViolationException.class)
     ResponseEntity<ProblemDetail> controllerNotfound(ConstraintViolationException exception) {
 

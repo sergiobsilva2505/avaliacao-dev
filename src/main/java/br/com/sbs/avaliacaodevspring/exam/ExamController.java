@@ -3,6 +3,7 @@ package br.com.sbs.avaliacaodevspring.exam;
 import br.com.sbs.avaliacaodevspring.exam.dto.ExamView;
 import br.com.sbs.avaliacaodevspring.exam.dto.NewExamForm;
 import br.com.sbs.avaliacaodevspring.exam.dto.UpdateExamForm;
+import com.google.gson.Gson;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

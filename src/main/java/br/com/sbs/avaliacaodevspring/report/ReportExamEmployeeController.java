@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.Thymeleaf;
 
 import java.util.List;
 
@@ -35,9 +34,8 @@ public class ReportExamEmployeeController {
         if (bindingResult.hasErrors()) {
             return showForm(reportByPeriodForm, model);
         }
-        List<ReportByPeriod> rows = employeeExamService.getReportByPeriod(reportByPeriodForm);
-//        List<ReportByPeriodDTO> rows = list.stream().map(ReportByPeriodDTO::new).toList();
-        redirectAttributes.addAttribute("rows", rows);
+        List<ReportByPeriod> rowsReport = employeeExamService.getReportByPeriod(reportByPeriodForm);
+        redirectAttributes.addAttribute("rowsReport", rowsReport);
 
         return "redirect:/relatorios";
     }

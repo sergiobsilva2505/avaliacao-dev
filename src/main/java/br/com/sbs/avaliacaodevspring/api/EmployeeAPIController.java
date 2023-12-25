@@ -34,7 +34,7 @@ public class EmployeeAPIController {
 
     @GetMapping
     ResponseEntity<Page<EmployeeView>> findAll(@RequestParam(value = "page", defaultValue = "1") Integer currentPage,
-                                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Model model) {
+                                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
         Page<EmployeeView> employees = employeeService.findAll(pageRequest);
 

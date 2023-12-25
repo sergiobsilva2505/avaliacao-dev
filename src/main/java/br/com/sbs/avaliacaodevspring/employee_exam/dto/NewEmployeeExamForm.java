@@ -3,6 +3,7 @@ package br.com.sbs.avaliacaodevspring.employee_exam.dto;
 import br.com.sbs.avaliacaodevspring.employee.Employee;
 import br.com.sbs.avaliacaodevspring.employee_exam.EmployeeExam;
 import br.com.sbs.avaliacaodevspring.exam.Exam;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/exames")
@@ -35,7 +34,7 @@ public class ExamAPIController {
     @GetMapping
     ResponseEntity<Page<ExamView>> findAll(@RequestParam(value = "page", defaultValue = "1") Integer currentPage,
                                            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-        PageRequest pageRequest = PageRequest.of(currentPage, pageSize);
+        PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize);
         Page<ExamView> exams = examService.findAll(pageRequest);
 
         return ResponseEntity.ok().body(exams);

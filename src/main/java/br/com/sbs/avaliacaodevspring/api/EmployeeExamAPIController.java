@@ -43,7 +43,7 @@ public class EmployeeExamAPIController {
     }
 
     @PostMapping
-    ResponseEntity<EmployeeExamView> save(@Valid @RequestBody NewEmployeeExamForm newEmployeeExamForm) {
+    ResponseEntity<EmployeeExamView> save(@RequestBody @Valid NewEmployeeExamForm newEmployeeExamForm) {
         EmployeeExam employeeExam = employeeExamService.save(newEmployeeExamForm);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employeeExam.getRowid()).toUri();
 
