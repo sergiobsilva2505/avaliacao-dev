@@ -14,13 +14,17 @@ public interface EmployeeExamRepository extends JpaRepository<EmployeeExam, Long
 
     boolean existsByEmployee_RowidAndExam_RowidAndAccomplishedAt(Long employeeRowId, Long examRowId, LocalDate accomplishedAt);
 
+    default boolean newQuery(Long employeeRowId, Long examRowId, LocalDate accomplishedAt) {
+         return existsByEmployee_RowidAndExam_RowidAndAccomplishedAt(employeeRowId, examRowId, accomplishedAt);
+    }
+
     boolean existsByEmployee_RowidAndExam_RowidAndAccomplishedAtAndRowidNot(Long employeeRowId, Long examRowId, LocalDate accomplishedAt, Long rowid);
 
     @Query(value = """
-            SELECT fc.rowid AS rowIdEmployee, fc.name AS nomeEmployee, ex.rowid AS rowIdExam, ex.name AS nomeExam, ef.accomplished_at AS accomplishedAt FROM employee_exam ef
-                JOIN exam ex ON ex.rowid = ef.exam_id
-                JOIN employee fc ON fc.rowid = ef.employee_id
-                WHERE ef.accomplished_at BETWEEN  :initialDate AND :finishDate
+            SELECT ep.rowid AS rowIdEmployee, ep.name AS nomeEmployee, ex.rowid AS rowIdExam, ex.name AS nomeExam, ee.accomplished_at AS accomplishedAt FROM employee_exam ee
+                JOIN exam ex ON ex.rowid = ee.exam_id
+                JOIN employee ep ON ep.rowid = ee.employee_id
+                WHERE ee.accomplished_at BETWEEN  :initialDate AND :finishDate
             """, nativeQuery = true)
     List<ReportByPeriod> getReportByPeriod(@Param("initialDate") LocalDate initialDate, @Param("finishDate") LocalDate finishDate);
 

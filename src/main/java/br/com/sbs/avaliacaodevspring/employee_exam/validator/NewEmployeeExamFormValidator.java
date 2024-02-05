@@ -24,7 +24,7 @@ public class NewEmployeeExamFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         NewEmployeeExamForm form = (NewEmployeeExamForm) target;
 
-        if (employeeExamRepository.existsByEmployee_RowidAndExam_RowidAndAccomplishedAt(form.employeeId(), form.examId(), form.accomplishedAt())) {
+        if (employeeExamRepository.newQuery(form.employeeId(), form.examId(), form.accomplishedAt())) {
             errors.rejectValue("accomplishedAt", "employee.exam.already.exists");
         }
     }

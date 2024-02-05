@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestControllerAdvice("br.com.sbs.avaliacaodevspring.api")
 public class GlobalAPIExceptionHandler {
+
+    private static final Logger logger = Logger.getLogger(GlobalAPIExceptionHandler.class.getName());
 
     private final MessageSource messageSource;
 
@@ -47,6 +50,8 @@ public class GlobalAPIExceptionHandler {
         problemDetail.setTitle("Erro de validação");
         problemDetail.setDetail("Um ou mais campos estão com dados incorretos ou o dado já existe");
         problemDetail.setProperty("invalidParams", invalidParams);
+
+//        logger.info(exception.getDetailMessageCode());
 
         return ResponseEntity.status(httpStatus).body(problemDetail);
     }

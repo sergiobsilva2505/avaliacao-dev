@@ -25,7 +25,7 @@ public class UpdateEmployeeExamFormValidator implements Validator {
         UpdateEmployeeExamForm form = (UpdateEmployeeExamForm) target;
 
         if (employeeExamRepository.existsByEmployee_RowidAndExam_RowidAndAccomplishedAtAndRowidNot(form.employeeId(), form.examId(), form.accomplishedAt(), form.rowid())) {
-            errors.rejectValue("existsAlready", "employee.exam.already.exists");
+            errors.rejectValue("accomplishedAt", "employee.exam.already.exists");
         }
     }
 }
